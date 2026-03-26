@@ -48,7 +48,7 @@ export function HeroSection({ myInfo }: Props) {
   }
 
   return (
-    <div className="w-full bg-card p-8">
+    <div className="w-full bg-card sm:p-8">
       <section id="home" className="py-10 overflow-hidden">
         <div
           ref={ref}
@@ -144,7 +144,7 @@ export function HeroSection({ myInfo }: Props) {
                 Programming Skills
                 <div className="h-0.5 flex-1 bg-linear-to-r from-primary/50 to-transparent"></div>
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
                 {skills.map((skill, index) => (
                   <div
                     key={index}
