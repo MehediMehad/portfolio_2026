@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { logoutUser } from "@/services/auth/logoutUser";
-import { UserInfo } from "@/types/user.interface";
+import { UserInfo } from "@/types/user";
 import { Settings, User } from "lucide-react";
 import Link from "next/link";
 

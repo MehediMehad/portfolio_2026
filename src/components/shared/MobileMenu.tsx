@@ -1,6 +1,6 @@
 "use client";
 
-import { UserInfo } from "@/types/user.interface";
+import { UserInfo } from "@/types/user";
 import { LayoutDashboard, Menu } from "lucide-react";
 import Link from "next/link";
 import UserDropdown from "../modules/Dashboard/UserDropdown";

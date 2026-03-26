@@ -1,0 +1,6 @@
+export interface TSocialMedia {
+    id: string
+    platformName: string
+    url: string
+    icon: string
+}

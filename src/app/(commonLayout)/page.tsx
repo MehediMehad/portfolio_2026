@@ -1,9 +1,13 @@
 import { HeroSection } from "@/components/modules/Portfolio/Home/HeroSection";
+import { getMyInfo } from "@/services/auth/getUserInfo";
 
-const HomePage = () => {
+const HomePage = async () => {
+  // server side render
+  const myInfo = await getMyInfo();
+
   return (
     <div className="">
-      <HeroSection />
+      <HeroSection myInfo={myInfo} />
     </div>
   );
 };
