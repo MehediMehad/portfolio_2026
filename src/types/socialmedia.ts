@@ -1,6 +1,9 @@
+
+export type Platform = "Portfolio" | "LinkedIn" | "GitHub" | "Twitter" | "Facebook" | "Instagram" | "YouTube"
+
 export interface TSocialMedia {
     id: string
-    platformName: string
+    platformName: Platform
     url: string
     icon: string
 }

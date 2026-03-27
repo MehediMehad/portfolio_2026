@@ -1,8 +1,19 @@
 "use client";
-import { GithubIcon, LinkedinIcon, CodeIcon, LayoutIcon } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Image from "next/image";
-import { TUser } from "@/types";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  Facebook,
+  Instagram,
+  Youtube,
+  TwitterIcon, // TwitterIcon
+  GlobeIcon, // PortfolioIcon
+  CodeIcon,
+  LayoutIcon,
+} from "lucide-react";
+import { JSX } from "react";
+import { Platform, TUser } from "@/types";
 
 type Props = {
   myInfo: TUser | null;
@@ -42,6 +53,16 @@ export function HeroSection({ myInfo }: Props) {
           ),
         }))
       : fallbackSkills;
+
+  const socialIcons: Record<Platform, JSX.Element> = {
+    GitHub: <GithubIcon className="w-5 h-5" />,
+    LinkedIn: <LinkedinIcon className="w-5 h-5" />,
+    Facebook: <Facebook className="w-5 h-5" />,
+    Instagram: <Instagram className="w-5 h-5" />,
+    YouTube: <Youtube className="w-5 h-5" />,
+    Twitter: <TwitterIcon className="w-5 h-5" />,
+    Portfolio: <GlobeIcon className="w-5 h-5" />,
+  };
 
   if (!myInfo) {
     return <div className="text-center py-20">Loading profile...</div>;
@@ -102,16 +123,8 @@ export function HeroSection({ myInfo }: Props) {
                     rel="noopener noreferrer"
                     className="p-3 rounded-full bg-background border-2 border-border hover:border-primary hover:text-primary transition-all duration-300 hover:shadow-[0_0_10px_rgba(28,199,105,0.2)]"
                   >
-                    {social.icon ? (
-                      <img
-                        src={social.icon}
-                        alt={social.platformName}
-                        className="w-6 h-6"
-                      />
-                    ) : social.platformName.toLowerCase().includes("github") ? (
-                      <GithubIcon className="w-6 h-6" />
-                    ) : (
-                      <LinkedinIcon className="w-6 h-6" />
+                    {socialIcons[social.platformName] || (
+                      <GlobeIcon className="w-4 h-4" />
                     )}
                   </a>
                 ))}

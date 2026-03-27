@@ -1,7 +1,6 @@
 import { TSkill, TSocialMedia } from "@/types"
 
 
-
 export interface TUser {
     id: string
     name: string
@@ -9,9 +8,12 @@ export interface TUser {
     email: string
     number: string
     aboutMe: string
+    shortBio: string
     designation: string
     address: string
     skills: TSkill[]
     socialMedias: TSocialMedia[]
 }
+
+
 
