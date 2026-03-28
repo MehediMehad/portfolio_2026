@@ -1,8 +1,7 @@
 "use client";
-import { ExternalLinkIcon, GithubIcon, ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Link from "next/link";
-import Image from "next/image";
 import { TProject } from "@/types/projects";
 import { ProjectCard } from "@/components/shared/Card/ProjectCard";
 

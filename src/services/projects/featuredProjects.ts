@@ -1,7 +1,7 @@
 // src/services/projects/featuredProjects.ts
 
 import { serverFetch } from "@/lib/server-fetch";
-import { TProject } from "@/types/projects";
+import { TProject } from "@/types";
 
 export const getFeaturedProjects = async (): Promise<TProject[] | null> => {
     try {
