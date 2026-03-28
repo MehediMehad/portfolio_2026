@@ -22,7 +22,7 @@ export function Navbar() {
     },
   ];
   return (
-    <nav className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80border-b-2 border-border">
+    <nav className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 border-b border-border">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2 group">

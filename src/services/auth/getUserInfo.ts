@@ -1,3 +1,4 @@
+// src/services/auth/getUserInfo.ts
 import { serverFetch } from "@/lib/server-fetch";
 import { TUser } from "@/types";
 
