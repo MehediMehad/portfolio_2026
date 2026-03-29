@@ -1,81 +1,46 @@
 // src/services/projects/index.ts
+import { defaultMeta } from "@/constants";
 import { serverFetch } from "@/lib/server-fetch";
+import { FetchResponse, TMeta, TProject } from "@/types";
 
-export interface ProjectsResponse {
-    success: boolean
-    statusCode: number
-    message: string
-    meta: Meta
-    data: TProject[]
-}
-
-export interface Meta {
-    page: number
-    limit: number
-    total: number
-    totalPage: number
-    hasNextPage: boolean
-    hasPrevPage: boolean
-}
-
-export interface TProject {
-    id: string
-    image: string
-    title: string
-    overview: string
-    description: string
-    techStack: string[]
-    liveURL: string
-    gitHubURL: string
-    is_public: boolean
-    createdAt: string
-}
-
-
-export const getProjects = async (params: {
+interface GetProjectsParams {
     page?: number;
     limit?: number;
-} = {}): Promise<{ meta: Meta; data: TProject[] }> => {
+}
 
+export const getProjects = async (
+    params: GetProjectsParams = {}
+): Promise<{ meta: TMeta; data: TProject[] }> => {
     const { page = 1, limit = 6 } = params;
     try {
-
         const queryParams = new URLSearchParams({
-            page: page.toString(),
-            limit: limit.toString(),
+            page: String(page),
+            limit: String(limit),
         });
 
-        const res = await serverFetch.get(`/projects?${queryParams.toString()}`, {
-            cache: "no-store", // SSR fresh data
+        const res = await serverFetch.get(`/projects?${queryParams}`, {
+            cache: "no-store",
         });
 
         if (!res.ok) {
-            throw new Error("Failed to fetch projects");
+            throw new Error(`HTTP Error: ${res.status}`);
         }
 
-        const data: ProjectsResponse = await res.json();
-        if (!data.success) {
-            throw new Error(data.message);
-        }
+        const result: FetchResponse<TProject[]> = await res.json();
 
+        if (!result.success) {
+            throw new Error(result.message);
+        }
 
         return {
-            meta: data.meta,
-            data: data.data,
+            meta: result.meta ?? defaultMeta,
+            data: result.data ?? [],
         };
     } catch (error) {
         console.error("❌ getProjects error:", error);
         return {
-            meta: {
-                page: 0,
-                limit: 0,
-                total: 0,
-                totalPage: 0,
-                hasNextPage: false,
-                hasPrevPage: false,
-            },
+            meta: defaultMeta,
             data: [],
         };
     }
 };
-

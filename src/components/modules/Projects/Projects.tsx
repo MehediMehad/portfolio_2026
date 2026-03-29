@@ -4,12 +4,12 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProjectCard } from "@/components/shared/Card/ProjectCard";
-import { getProjects } from "@/services/projects";
-import { TProject, Meta } from "@/services/projects";
+import { getProjects, TMeta } from "@/services/projects";
+import { TProject } from "@/types";
 
 const Projects = () => {
   const [projects, setProjects] = useState<TProject[]>([]);
-  const [meta, setMeta] = useState<Meta>({
+  const [meta, setMeta] = useState<TMeta>({
     page: 1,
     limit: 9,
     total: 0,
