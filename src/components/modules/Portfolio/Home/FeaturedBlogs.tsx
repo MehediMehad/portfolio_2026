@@ -2,15 +2,7 @@
 import { CalendarIcon, ArrowRightIcon } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Image from "next/image";
-
-export interface TBlog {
-  id: string;
-  title: string;
-  overview: string;
-  image: string;
-  tags: string[];
-  createdAt: string;
-}
+import { TBlog } from "@/types";
 
 type Props = {
   blogs: TBlog[];
@@ -96,10 +88,19 @@ export function FeaturedBlogs({ blogs, author }: Props) {
                 </p>
 
                 {/* Meta */}
-                <div className="flex items-center gap-6 text-sm text-muted-foreground mb-4">
-                  <div className="flex items-center gap-2">
-                    <CalendarIcon className="w-4 h-4 text-primary" />
-                    <span>{formatDate(post.createdAt)}</span>
+                <div className="flex justify-between">
+                  {/* Type Badge */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="px-2.5 py-1 text-xs font-bold rounded-md bg-primary/10 text-primary border border-primary/20">
+                      {post.type}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-6 text-sm text-muted-foreground mb-4">
+                    <div className="flex items-center gap-2">
+                      <CalendarIcon className="w-4 h-4 text-primary" />
+                      <span>{formatDate(post.createdAt)}</span>
+                    </div>
                   </div>
                 </div>
 

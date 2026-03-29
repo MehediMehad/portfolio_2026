@@ -4,5 +4,7 @@ export interface TBlog {
     overview: string
     image: string
     tags: string[]
+    type: "Tech" | "Personal" | "Business" | "Lifestyle" | "Health" | "Travel" | "Food" | "Entertainment" | "Education"
     createdAt: string
 }
+

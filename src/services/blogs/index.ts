@@ -1,0 +1,51 @@
+// src/services/blogs/index.ts
+import { defaultMeta } from "@/constants";
+import { serverFetch } from "@/lib/server-fetch";
+import { FetchResponse, TBlog, TMeta } from "@/types";
+
+interface GetProjectsParams {
+    searchTerm?: string;
+    page?: number;
+    limit?: number;
+}
+
+export const getBlogs = async (
+    params: GetProjectsParams = {}
+): Promise<{ meta: TMeta; data: TBlog[] }> => {
+    const { page = 1, limit = 6 } = params;
+    try {
+        const queryParams = new URLSearchParams({
+            page: String(page),
+            limit: String(limit),
+        });
+
+        if (params.searchTerm) {
+            queryParams.set("searchTerm", params.searchTerm);
+        }
+
+        const res = await serverFetch.get(`/blogs?${queryParams}`, {
+            cache: "no-store",
+        });
+
+        if (!res.ok) {
+            throw new Error(`HTTP Error: ${res.status}`);
+        }
+
+        const result: FetchResponse<TBlog[]> = await res.json();
+
+        if (!result.success) {
+            throw new Error(result.message);
+        }
+
+        return {
+            meta: result.meta ?? defaultMeta,
+            data: result.data ?? [],
+        };
+    } catch (error) {
+        console.error("❌ getBlogs error:", error);
+        return {
+            meta: defaultMeta,
+            data: [],
+        };
+    }
+};
