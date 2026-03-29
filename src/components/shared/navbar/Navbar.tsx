@@ -6,19 +6,19 @@ export function Navbar() {
   const navLinks = [
     {
       name: "Home",
-      href: "#home",
+      href: "/",
     },
     {
       name: "Projects",
-      href: "#projects",
+      href: "/projects",
     },
     {
       name: "Blogs",
-      href: "#blogs",
+      href: "/blogs",
     },
     {
       name: "Contact",
-      href: "#contact",
+      href: "/contact",
     },
   ];
   return (
