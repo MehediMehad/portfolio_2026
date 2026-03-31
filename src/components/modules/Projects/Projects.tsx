@@ -4,8 +4,8 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProjectCard } from "@/components/shared/Card/ProjectCard";
-import { getProjects, TMeta } from "@/services/projects";
-import { TProject } from "@/types";
+import { getProjects } from "@/services/projects";
+import { TMeta, TProject } from "@/types";
 
 const Projects = () => {
   const [projects, setProjects] = useState<TProject[]>([]);
