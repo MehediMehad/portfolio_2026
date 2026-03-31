@@ -5,13 +5,13 @@ import { Separator } from "@/components/ui/separator";
 import { getIconComponent } from "@/lib/icon-mapper";
 import { cn } from "@/lib/utils";
 import { NavSection } from "@/types/dashboard.interface";
-import { UserInfo } from "@/types/user";
+import { TUser } from "@/types";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface DashboardSidebarContentProps {
-  userInfo: UserInfo;
+  userInfo: TUser;
   navItems: NavSection[];
   dashboardHome: string;
 }
@@ -90,7 +90,7 @@ const DashboardSidebarContent = ({
           <div className="flex-1 overflow-hidden">
             <p className="text-sm font-medium truncate">{userInfo.name}</p>
             <p className="text-xs text-muted-foreground capitalize">
-              {userInfo.role.toLowerCase()}
+              {userInfo.designation.toLowerCase()}
             </p>
           </div>
         </div>

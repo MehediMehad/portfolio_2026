@@ -1,20 +1,18 @@
 import { getDefaultDashboardRoute } from "@/lib/auth-utils";
 import { getNavItemsByRole } from "@/lib/navItems.config";
-import { getUserInfo } from "@/services/auth/getUserInfo";
-import { UserInfo } from "@/types/user";
+// import { UserInfo } from "@/types/user";
 import DashboardNavbarContent from "./DashboardNavbarContent";
+import { getMyInfo } from "@/services/auth/getUserInfo";
+import { TUser } from "@/types";
 
 const DashboardNavbar = async () => {
-  const userInfo = (await getUserInfo()) as UserInfo;
-  const navItems = await getNavItemsByRole(userInfo.role);
-  const dashboardHome = getDefaultDashboardRoute(userInfo.role);
+  // const userInfo = (await getUserInfo()) as UserInfo;
+  // const navItems = await getNavItemsByRole(userInfo.role);
+  // const dashboardHome = getDefaultDashboardRoute(userInfo.role);
+  const user: TUser = (await getMyInfo()) as TUser;
 
   return (
-    <DashboardNavbarContent
-      userInfo={userInfo}
-      navItems={navItems}
-      dashboardHome={dashboardHome}
-    />
+    <DashboardNavbarContent userInfo={user} navItems={[]} dashboardHome={""} />
   );
 };
 

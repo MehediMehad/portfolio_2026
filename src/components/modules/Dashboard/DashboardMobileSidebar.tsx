@@ -6,13 +6,13 @@ import { Separator } from "@/components/ui/separator";
 import { SheetTitle } from "@/components/ui/sheet";
 import { getIconComponent } from "@/lib/icon-mapper";
 import { cn } from "@/lib/utils";
+import { TUser } from "@/types";
 import { NavSection } from "@/types/dashboard.interface";
-import { UserInfo } from "@/types/user";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface DashboardMobileSidebarContentProps {
-  userInfo: UserInfo;
+  userInfo: TUser;
   navItems: NavSection[];
   dashboardHome: string;
 }
@@ -89,7 +89,7 @@ const DashboardMobileSidebar = ({
           <div className="flex-1 overflow-hidden">
             <p className="text-sm font-medium truncate">{userInfo.name}</p>
             <p className="text-xs text-muted-foreground capitalize">
-              {userInfo.role.toLowerCase()}
+              {userInfo.designation.toLowerCase()}
             </p>
           </div>
         </div>

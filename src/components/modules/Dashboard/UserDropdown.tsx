@@ -11,12 +11,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { logoutUser } from "@/services/auth/logoutUser";
-import { UserInfo } from "@/types/user";
+import { TUser } from "@/types";
 import { Settings, User } from "lucide-react";
 import Link from "next/link";
 
 interface UserDropdownProps {
-  userInfo: UserInfo;
+  userInfo: TUser;
 }
 
 const UserDropdown = ({ userInfo }: UserDropdownProps) => {
@@ -38,7 +38,7 @@ const UserDropdown = ({ userInfo }: UserDropdownProps) => {
             <p className="text-sm font-medium">{userInfo.name}</p>
             <p className="text-xs text-muted-foreground">{userInfo.email}</p>
             <p className="text-xs text-primary capitalize">
-              {userInfo.role.toLowerCase()}
+              {userInfo.aboutMe.toLowerCase()}
             </p>
           </div>
         </DropdownMenuLabel>

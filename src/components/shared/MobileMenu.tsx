@@ -1,6 +1,6 @@
 "use client";
 
-import { UserInfo } from "@/types/user";
+import { TUser } from "@/types";
 import { LayoutDashboard, Menu } from "lucide-react";
 import Link from "next/link";
 import UserDropdown from "../modules/Dashboard/UserDropdown";
@@ -11,7 +11,7 @@ import AISearchDialog from "./AISSearchDialog";
 interface MobileMenuProps {
   navItems: Array<{ href: string; label: string }>;
   hasAccessToken: boolean;
-  userInfo?: UserInfo | null;
+  userInfo?: TUser | null;
   dashboardRoute?: string;
 }
 
