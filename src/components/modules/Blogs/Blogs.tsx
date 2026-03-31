@@ -120,7 +120,7 @@ const Blogs = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogs.map((blog, index) => (
                 <BlogCard
-                  key={blog.id}
+                  key={blog.slug}
                   blog={blog}
                   index={index}
                   isVisible={true}

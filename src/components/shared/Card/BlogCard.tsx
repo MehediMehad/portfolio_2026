@@ -131,7 +131,7 @@ export function BlogCard({ blog, index = 0, isVisible = true, author }: Props) {
           </div>
 
           <Link
-            href={`/blogs/${blog.id}`}
+            href={`/blogs/${blog.slug}`} /// blog/${blog.slug}
             className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 group/link"
           >
             Read Full

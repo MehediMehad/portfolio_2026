@@ -12,6 +12,21 @@ interface Props {
 }
 
 export function ProjectCard({ project, index = 0, isVisible }: Props) {
+  // Color mapping for project types
+  const typeColors: Record<string, string> = {
+    Full_Stack: "bg-violet-500/10 text-violet-500 border-violet-500/30",
+    Frontend: "bg-blue-500/10 text-blue-500 border-blue-500/30",
+    Backend: "bg-emerald-500/10 text-emerald-500 border-emerald-500/30",
+    Dashboard: "bg-amber-500/10 text-amber-500 border-amber-500/30",
+    Mobile: "bg-rose-500/10 text-rose-500 border-rose-500/30",
+    New_Feature: "bg-cyan-500/10 text-cyan-500 border-cyan-500/30",
+    Experiment: "bg-purple-500/10 text-purple-500 border-purple-500/30",
+    Fun: "bg-pink-500/10 text-pink-500 border-pink-500/30",
+    Learning: "bg-orange-500/10 text-orange-500 border-orange-500/30",
+    Client: "bg-teal-500/10 text-teal-500 border-teal-500/30",
+    Open_Source: "bg-lime-500/10 text-lime-500 border-lime-500/30",
+    Other: "bg-gray-500/10 text-gray-500 border-gray-500/30",
+  };
   return (
     <div
       className={`bg-card border-2 border-border rounded-xl overflow-hidden flex flex-col hover:border-primary transition-all duration-500 hover:shadow-[0_10px_30px_rgba(28,199,105,0.15)] group opacity-0 ${isVisible ? `animate-fade-in-up delay-${index * 100}` : ""}`}
@@ -34,6 +49,20 @@ export function ProjectCard({ project, index = 0, isVisible }: Props) {
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-1">
+        {/* Project Types */}
+        {project.types && project.types.length > 0 && (
+          <div className="mb-4 flex flex-wrap gap-2">
+            {project.types.map((type) => (
+              <span
+                key={type}
+                className={`inline-block px-3 py-1 text-xs font-bold rounded-md border ${typeColors[type] || "bg-primary/10 text-primary border-primary/20"}`}
+              >
+                {type.replace("_", " ")}
+              </span>
+            ))}
+          </div>
+        )}
+
         <h3 className="text-xl font-bold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
@@ -84,7 +113,7 @@ export function ProjectCard({ project, index = 0, isVisible }: Props) {
           </div>
 
           <Link
-            href={`/projects/${project.id}`}
+            href={`/projects/${project.slug}`}
             className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 group/link"
           >
             View Details

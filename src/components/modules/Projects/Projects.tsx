@@ -74,7 +74,7 @@ const Projects = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project, index) => (
                 <ProjectCard
-                  key={project.id}
+                  key={project.slug}
                   project={project}
                   index={index}
                   isVisible={true} // Always visible on this page

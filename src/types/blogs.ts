@@ -10,6 +10,7 @@ export type BlogType =
 
 export interface TBlog {
     id: string
+    slug: string
     title: string
     overview: string
     image: string
