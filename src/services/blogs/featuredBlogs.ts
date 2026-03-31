@@ -6,7 +6,10 @@ import { TBlog } from "@/types";
 export const getFeaturedBlogs = async (): Promise<TBlog[] | null> => {
     try {
         const res = await serverFetch.get("/featured-blogs", {
-            cache: "no-store", // SSR fresh data
+            // cache: "no-store", // SSR fresh data
+            next: {
+                revalidate: 180, // 3 minutes
+            }
         });
 
         if (!res.ok) {
