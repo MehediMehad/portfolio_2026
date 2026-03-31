@@ -12,15 +12,6 @@ type Props = {
 export function FeaturedBlogs({ blogs, author }: Props) {
   const { ref, isVisible } = useScrollAnimation();
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
   return (
     <section id="blogs" className="py-20">
       <div className="container mx-auto px-4" ref={ref}>

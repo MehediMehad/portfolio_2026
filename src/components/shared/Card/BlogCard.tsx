@@ -26,7 +26,6 @@ export function BlogCard({ blog, index = 0, isVisible = true, author }: Props) {
   const typeColors: Record<TBlog["type"], string> = {
     Tech: "bg-blue-500/10 text-blue-500 border-blue-500/20",
     Personal: "bg-purple-500/10 text-purple-500 border-purple-500/20",
-    Business: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
     Lifestyle: "bg-rose-500/10 text-rose-500 border-rose-500/20",
     Health: "bg-green-500/10 text-green-500 border-green-500/20",
     Travel: "bg-orange-500/10 text-orange-500 border-orange-500/20",

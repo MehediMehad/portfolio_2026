@@ -7,20 +7,25 @@ interface GetProjectsParams {
     searchTerm?: string;
     page?: number;
     limit?: number;
+    type?: string;
 }
 
 export const getBlogs = async (
     params: GetProjectsParams = {}
 ): Promise<{ meta: TMeta; data: TBlog[] }> => {
-    const { page = 1, limit = 6 } = params;
+    const { page = 1, limit = 6, type, searchTerm } = params;
     try {
         const queryParams = new URLSearchParams({
             page: String(page),
             limit: String(limit),
         });
 
-        if (params.searchTerm) {
-            queryParams.set("searchTerm", params.searchTerm);
+        if (searchTerm) {
+            queryParams.set("searchTerm", searchTerm);
+        }
+
+        if (type && type !== "All") {
+            queryParams.set("type", type);
         }
 
         const res = await serverFetch.get(`/blogs?${queryParams}`, {

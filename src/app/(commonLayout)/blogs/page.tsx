@@ -1,11 +1,8 @@
+// src/app/(commonLayout)/projects/page.tsx
 import Blogs from "@/components/modules/Blogs/Blogs";
 
 const Page = () => {
-  return (
-    <>
-      <Blogs />
-    </>
-  );
+  return <Blogs />;
 };
 
 export default Page;

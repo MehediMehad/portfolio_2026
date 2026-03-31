@@ -1,10 +1,19 @@
+export type BlogType =
+    | "Tech"
+    | "Personal"
+    | "Lifestyle"
+    | "Health"
+    | "Travel"
+    | "Food"
+    | "Entertainment"
+    | "Education";
+
 export interface TBlog {
     id: string
     title: string
     overview: string
     image: string
     tags: string[]
-    type: "Tech" | "Personal" | "Business" | "Lifestyle" | "Health" | "Travel" | "Food" | "Entertainment" | "Education"
+    type: BlogType
     createdAt: string
 }
-
