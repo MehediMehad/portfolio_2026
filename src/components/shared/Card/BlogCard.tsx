@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarIcon, ArrowRightIcon } from "lucide-react";
-import { TBlog } from "@/types";
+import { TBlog, TRelatedBlog } from "@/types";
 
 interface Props {
   blog: TBlog;
