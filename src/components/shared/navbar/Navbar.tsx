@@ -46,7 +46,8 @@ export function Navbar() {
             ))}
           </ul>
           <a
-            href="#resume"
+            target="_blank"
+            href="https://drive.google.com/file/d/1zJx7UiMsPUJArwD0J3dtdy1fZCXDKDZ1/view?usp=sharing"
             className="px-6 py-2.5 rounded-md border-2 border-primary text-primary font-bold hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:shadow-[0_0_15px_rgba(28,199,105,0.3)]"
           >
             Resume
