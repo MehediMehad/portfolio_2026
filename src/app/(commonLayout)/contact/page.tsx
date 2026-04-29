@@ -1,15 +1,12 @@
 import {
-  GithubIcon,
   GlobeIcon,
-  LinkedinIcon,
   MailIcon,
   MapPinIcon,
   PhoneIcon,
   SendIcon,
-  TwitterIcon,
 } from "lucide-react";
 import { getMyInfo } from "@/services/auth/getUserInfo";
-import { Platform } from "@/types";
+import { socialMedias } from "@/constants/myInfo";
 
 const fallbackProfile = {
   email: "mdmehedihasanmehad@gmail.com",
@@ -17,45 +14,14 @@ const fallbackProfile = {
   number: "+880 1XXXXXXXXX",
 };
 
-const faqs = [
-  "What technologies do you work with?",
-  "Are you available for freelance projects?",
-  "How long does it take to get a response?",
-];
-
-const formatUrlLabel = (url?: string) => {
-  if (!url) return "www.facebook.com";
-
-  try {
-    return new URL(url).hostname.replace(/^www\./, "www.");
-  } catch {
-    return url.replace(/^https?:\/\//, "");
-  }
-};
-
 const ContactPage = async () => {
   const myInfo = await getMyInfo();
 
-  const email = myInfo?.email || fallbackProfile.email;
-  const location = myInfo?.address || fallbackProfile.address;
-  const phone = myInfo?.number || fallbackProfile.number;
-  const portfolioUrl =
-    myInfo?.socialMedias?.find((item) => item.platformName === "Portfolio")
-      ?.url ||
-    myInfo?.socialMedias?.find((item) => item.url)?.url ||
-    "https://www.facebook.com";
+  if (!myInfo) return null;
 
-  const socialIcons: Partial<Record<Platform, React.ElementType>> = {
-    GitHub: GithubIcon,
-    LinkedIn: LinkedinIcon,
-    Twitter: TwitterIcon,
-    Portfolio: GlobeIcon,
-  };
-
-  const socialLinks =
-    myInfo?.socialMedias
-      ?.filter((social) => socialIcons[social.platformName])
-      .slice(0, 4) || [];
+  const email = myInfo.email;
+  const location = myInfo.address;
+  const phone = myInfo.number;
 
   const contactItems = [
     {
@@ -80,10 +46,10 @@ const ContactPage = async () => {
     },
     {
       title: "Website",
-      value: formatUrlLabel(portfolioUrl),
+      value: "www.facebook.com",
       detail: "Check out my work and projects",
       icon: GlobeIcon,
-      href: portfolioUrl,
+      href: "https://www.facebook.com",
     },
   ];
 
@@ -110,35 +76,22 @@ const ContactPage = async () => {
               </p>
 
               <div className="mt-7 flex flex-wrap gap-4">
-                {socialLinks.length > 0
-                  ? socialLinks.map((social) => {
-                      const Icon =
-                        socialIcons[social.platformName] || GlobeIcon;
+                {socialMedias.map((social) => {
+                  const Icon = social.icon;
 
-                      return (
-                        <a
-                          key={social.id}
-                          href={social.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={social.platformName}
-                          className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-background/70 text-foreground transition hover:border-primary hover:text-primary hover:shadow-[0_0_18px_rgba(139,92,246,0.22)]"
-                        >
-                          <Icon className="h-5 w-5" />
-                        </a>
-                      );
-                    })
-                  : [GithubIcon, LinkedinIcon, TwitterIcon, MailIcon].map(
-                      (Icon, index) => (
-                        <a
-                          key={index}
-                          href={index === 3 ? `mailto:${email}` : "#"}
-                          className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-background/70 text-foreground transition hover:border-primary hover:text-primary hover:shadow-[0_0_18px_rgba(139,92,246,0.22)]"
-                        >
-                          <Icon className="h-5 w-5" />
-                        </a>
-                      ),
-                    )}
+                  return (
+                    <a
+                      key={social.platformName}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.platformName}
+                      className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-background/70 text-foreground transition hover:border-primary hover:text-primary hover:shadow-[0_0_18px_rgba(139,92,246,0.22)]"
+                    >
+                      <Icon className="h-5 w-5" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
