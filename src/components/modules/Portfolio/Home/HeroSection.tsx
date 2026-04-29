@@ -79,14 +79,14 @@ export function HeroSection({ myInfo }: Props) {
           <div className="lg:col-span-4 flex flex-col items-center">
             <div className="w-full  border-2 border-border rounded-xl p-16 flex flex-col items-center text-center hover:border-primary transition-all duration-500 hover:shadow-[0_0_30px_rgba(28,199,105,0.1)] group">
               {/* Dynamic Profile Image */}
-              <div className="w-48 h-48 rounded-full bg-linear-to-r from-primary/20 to-primary/5 border-4 border-border group-hover:border-primary transition-all duration-500 flex items-center justify-center mb-6 overflow-hidden relative">
+              <div className="w-72 h-72 rounded-full bg-linear-to-r from-primary/20 to-primary/5 border-4 border-border group-hover:border-primary transition-all duration-500 flex items-center justify-center mb-6 overflow-hidden relative">
                 {myInfo.image ? (
                   <Image
                     src={myInfo.image}
                     alt={myInfo.name || "Profile"}
                     width={96}
                     height={96}
-                    priority
+                    // priority
                     className="w-full h-full object-cover rounded-full"
                   />
                 ) : (
@@ -133,7 +133,7 @@ export function HeroSection({ myInfo }: Props) {
           </div>
 
           {/* Right Column: About & Skills */}
-          <div className="lg:col-span-8 md:min-h-[550px] md:max-h-[550px] p-8 border-2 border-border border-l-4 border-l-primary rounded-l-xl flex flex-col gap-12">
+          <div className="lg:col-span-8 md:min-h-[646px] md:max-h-[646px] p-8 border-2 border-border border-l-4 border-l-primary rounded-l-xl flex flex-col gap-12">
             {/* About Me */}
             <div
               className={`opacity-0 delay-200 ${isVisible ? "animate-fade-in-up" : ""}`}
