@@ -9,7 +9,7 @@ export function FeaturedProjects({ projects }: { projects: TProject[] }) {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="projects" className="py-20 bg-card">
+    <section id="projects" className="py-20">
       <div className="container mx-auto px-4" ref={ref}>
         <div
           className={`flex justify-between items-end mb-12 opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}

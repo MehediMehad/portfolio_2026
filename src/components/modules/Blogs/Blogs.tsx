@@ -78,7 +78,7 @@ const Blogs = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 bg-background">
+    <div className="min-h-screen py-20">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
@@ -96,7 +96,7 @@ const Blogs = () => {
                 className={`px-5 py-2 text-sm font-medium rounded-xl border transition-all ${
                   selectedType === type
                     ? "bg-primary text-primary-foreground border-primary"
-                    : "border-border hover:border-primary hover:bg-card"
+                    : "border-border hover:border-primary hover:"
                 }`}
               >
                 {type}
@@ -111,7 +111,7 @@ const Blogs = () => {
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="h-[520px] bg-card border border-border rounded-xl animate-pulse"
+                className="h-[520px]  border border-border rounded-xl animate-pulse"
               />
             ))}
           </div>
@@ -147,7 +147,7 @@ const Blogs = () => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={!meta.hasPrevPage}
-              className="flex items-center gap-2 px-5 py-3 rounded-xl border border-border hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:bg-card"
+              className="flex items-center gap-2 px-5 py-3 rounded-xl border border-border hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:"
             >
               <ChevronLeft className="w-5 h-5" />
               Previous
@@ -166,7 +166,7 @@ const Blogs = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={!meta.hasNextPage}
-              className="flex items-center gap-2 px-5 py-3 rounded-xl border border-border hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:bg-card"
+              className="flex items-center gap-2 px-5 py-3 rounded-xl border border-border hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:"
             >
               Next
               <ChevronRight className="w-5 h-5" />

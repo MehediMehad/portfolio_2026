@@ -69,7 +69,7 @@ export function HeroSection({ myInfo }: Props) {
   }
 
   return (
-    <div className="w-full bg-card sm:p-8">
+    <div className="w-full sm:p-8">
       <section id="home" className="py-10 overflow-hidden">
         <div
           ref={ref}
@@ -77,7 +77,7 @@ export function HeroSection({ myInfo }: Props) {
         >
           {/* Left Column: Profile Card */}
           <div className="lg:col-span-4 flex flex-col items-center">
-            <div className="w-full bg-card border-2 border-border rounded-xl p-16 flex flex-col items-center text-center hover:border-primary transition-all duration-500 hover:shadow-[0_0_30px_rgba(28,199,105,0.1)] group">
+            <div className="w-full  border-2 border-border rounded-xl p-16 flex flex-col items-center text-center hover:border-primary transition-all duration-500 hover:shadow-[0_0_30px_rgba(28,199,105,0.1)] group">
               {/* Dynamic Profile Image */}
               <div className="w-48 h-48 rounded-full bg-linear-to-r from-primary/20 to-primary/5 border-4 border-border group-hover:border-primary transition-all duration-500 flex items-center justify-center mb-6 overflow-hidden relative">
                 {myInfo.image ? (
@@ -133,7 +133,7 @@ export function HeroSection({ myInfo }: Props) {
           </div>
 
           {/* Right Column: About & Skills */}
-          <div className="lg:col-span-8 md:min-h-[550px] md:max-h-[550px] bg-card p-8 border-2 border-border border-l-4 border-l-primary rounded-l-xl flex flex-col gap-12">
+          <div className="lg:col-span-8 md:min-h-[550px] md:max-h-[550px] p-8 border-2 border-border border-l-4 border-l-primary rounded-l-xl flex flex-col gap-12">
             {/* About Me */}
             <div
               className={`opacity-0 delay-200 ${isVisible ? "animate-fade-in-up" : ""}`}
@@ -142,7 +142,7 @@ export function HeroSection({ myInfo }: Props) {
                 About Me
                 <div className="h-0.5 flex-1 bg-linear-to-r from-primary/50 to-transparent"></div>
               </h2>
-              <div className="bg-card border-2 border-border rounded-xl p-8 transition-all duration-300">
+              <div className=" border-2 border-border rounded-xl p-8 transition-all duration-300">
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   {myInfo.aboutMe || "No about information available."}
                 </p>
@@ -161,7 +161,7 @@ export function HeroSection({ myInfo }: Props) {
                 {skills.map((skill, index) => (
                   <div
                     key={index}
-                    className="bg-card border-2 border-border rounded-lg p-4 flex items-center gap-3 hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_5px_15px_rgba(28,199,105,0.1)] group"
+                    className=" border-2 border-border rounded-lg p-4 flex items-center gap-3 hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_5px_15px_rgba(28,199,105,0.1)] group"
                   >
                     <div className="p-2 rounded-md bg-background border border-border group-hover:border-primary/30 transition-colors">
                       {skill.icon}

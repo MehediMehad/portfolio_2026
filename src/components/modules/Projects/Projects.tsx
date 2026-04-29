@@ -50,7 +50,7 @@ const Projects = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 bg-background">
+    <div className="min-h-screen py-20">
       <div className="container mx-auto px-4">
         <div className={`flex justify-between items-end mb-12`}>
           <h2 className="text-4xl font-bold text-primary flex items-center gap-4">
@@ -65,7 +65,7 @@ const Projects = () => {
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="h-[520px] bg-card border border-border rounded-xl animate-pulse"
+                className="h-[520px] border border-border rounded-xl animate-pulse"
               />
             ))}
           </div>
@@ -99,7 +99,7 @@ const Projects = () => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={!meta.hasPrevPage}
-              className="flex items-center gap-2 px-5 py-3 rounded-xl border border-border hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:bg-card"
+              className="flex items-center gap-2 px-5 py-3 rounded-xl border border-border hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all hover"
             >
               <ChevronLeft className="w-5 h-5" />
               Previous
@@ -118,7 +118,7 @@ const Projects = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={!meta.hasNextPage}
-              className="flex items-center gap-2 px-5 py-3 rounded-xl border border-border hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:bg-card"
+              className="flex items-center gap-2 px-5 py-3 rounded-xl border border-border hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all hover"
             >
               Next
               <ChevronRight className="w-5 h-5" />

@@ -29,7 +29,7 @@ export function ProjectCard({ project, index = 0, isVisible }: Props) {
   };
   return (
     <div
-      className={`bg-card border-2 border-border rounded-xl overflow-hidden flex flex-col hover:border-primary transition-all duration-500 hover:shadow-[0_10px_30px_rgba(28,199,105,0.15)] group opacity-0 ${isVisible ? `animate-fade-in-up delay-${index * 100}` : ""}`}
+      className={`border-2 border-border rounded-xl overflow-hidden flex flex-col hover:border-primary transition-all duration-500 hover:shadow-[0_10px_30px_rgba(28,199,105,0.15)] group opacity-0 ${isVisible ? `animate-fade-in-up delay-${index * 100}` : ""}`}
     >
       {/* Image */}
       <div className="h-80 bg-linear-to-r from-secondary to-background border-b-2 border-border relative overflow-hidden group-hover:border-primary/50 transition-colors">

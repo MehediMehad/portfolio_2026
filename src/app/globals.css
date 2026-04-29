@@ -6,25 +6,25 @@
    CSS Variables
 ----------------------------- */
 :root {
-  --background: hsl(220 20% 7%);
-  --foreground: hsl(210 20% 92%);
-  --card: hsl(220 20% 10%);
+  --background: hsl(230 70% 6%);
+  --foreground: hsl(210 30% 93%);
+  --card: hsl(228 55% 8%);
   --card-foreground: hsl(210 20% 92%);
-  --popover: hsl(220 20% 10%);
+  --popover: oklch(0.17 0.04 285 / 0.78);
   --popover-foreground: hsl(210 20% 92%);
-  --primary: hsl(152 76% 46%);
+  --primary: hsl(263 88% 63%);
   --primary-foreground: hsl(220 20% 7%);
   --secondary: hsl(220 15% 18%);
   --secondary-foreground: hsl(210 20% 92%);
   --muted: hsl(220 15% 18%);
-  --muted-foreground: hsl(215 16% 55%);
+  --muted-foreground: hsl(218 16% 72%);
   --accent: hsl(220 15% 18%);
   --accent-foreground: hsl(210 20% 92%);
   --destructive: hsl(0 62.8% 30.6%);
   --destructive-foreground: hsl(210 20% 92%);
-  --border: hsl(220 15% 18%);
-  --input: hsl(220 15% 18%);
-  --ring: hsl(152 76% 46%);
+  --border: hsl(228 37% 22%);
+  --input: hsl(228 37% 22%);
+  --ring: hsl(263 88% 63%);
   --radius: 0.5rem;
 }
 
@@ -36,7 +36,7 @@
   --card-foreground: 220 20% 7%;
   --popover: 210 20% 92%;
   --popover-foreground: 220 20% 7%;
-  --primary: 152 76% 60%;
+  --primary: 221 83% 60%;
   --primary-foreground: 220 20% 7%;
   --secondary: 220 20% 92%;
   --secondary-foreground: 220 20% 7%;
@@ -47,7 +47,7 @@
   --destructive: 0 62.8% 40%;
   --border: hsl(107, 73%, 36%);
   --input: 220 20% 40%;
-  --ring: 152 76% 60%;
+  --ring: 221 83% 60%;
 }
 
 /* -----------------------------
@@ -89,6 +89,24 @@
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
+    background-image:
+      radial-gradient(
+        circle at 18% 10%,
+        rgba(120, 60, 255, 0.2),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 86% 14%,
+        rgba(0, 162, 255, 0.18),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 78% 84%,
+        rgba(123, 44, 191, 0.18),
+        transparent 35%
+      ),
+      linear-gradient(180deg, #06081a 0%, #050716 100%);
+    background-attachment: fixed;
   }
 }
 

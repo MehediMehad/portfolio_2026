@@ -35,7 +35,7 @@ export const Footer = async () => {
   )?.url;
 
   return (
-    <footer className="bg-card border-t-2 border-border pt-16 pb-8 mt-20">
+    <footer className="border-t-2 border-border pt-16 pb-8 mt-20">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Brand Column */}

@@ -9,7 +9,7 @@ type Props = {
 
 const ProjectDetailsPage = ({ project }: Props) => {
   return (
-    <div className="min-h-screen py-20 bg-background">
+    <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 max-w-5xl">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
@@ -83,7 +83,7 @@ const ProjectDetailsPage = ({ project }: Props) => {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-1 text-sm border border-border rounded-md bg-card"
+                className="px-3 py-1 text-sm border border-border rounded-md"
               >
                 {tech}
               </span>

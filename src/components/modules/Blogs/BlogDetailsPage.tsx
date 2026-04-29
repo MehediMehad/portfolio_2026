@@ -53,7 +53,7 @@ const BlogDetailsPage = ({ blog, relatedBlogs, author }: Props) => {
               className="object-cover"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-card text-muted-foreground">
+            <div className="flex h-full w-full items-center justify-center  text-muted-foreground">
               No Preview Available
             </div>
           )}
@@ -65,7 +65,7 @@ const BlogDetailsPage = ({ blog, relatedBlogs, author }: Props) => {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           {/* Left Content */}
           <div className="lg:col-span-8">
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-10">
+            <div className="rounded-2xl border border-border  p-6 shadow-sm md:p-10">
               {/* Blog Meta */}
               <div className="mb-6 flex flex-wrap items-center gap-3">
                 <span
@@ -121,7 +121,7 @@ const BlogDetailsPage = ({ blog, relatedBlogs, author }: Props) => {
           {/* Right Sidebar */}
           <aside className="lg:col-span-4">
             <div className="sticky top-24 space-y-6">
-              <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+              <div className="rounded-2xl border border-border  p-6 shadow-sm">
                 <h3 className="mb-5 text-xl font-bold text-foreground">
                   Article Info
                 </h3>
