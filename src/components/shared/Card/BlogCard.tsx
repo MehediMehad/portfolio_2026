@@ -3,16 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarIcon, ArrowRightIcon } from "lucide-react";
-import { TBlog, TRelatedBlog } from "@/types";
+import { TBlog } from "@/types";
+import mehedi from "@/assets/images/MehediHasan.png";
 
 interface Props {
   blog: TBlog;
   index?: number;
   isVisible?: boolean;
-  author?: { name: string; image: string };
 }
 
-export function BlogCard({ blog, index = 0, isVisible = true, author }: Props) {
+export function BlogCard({ blog, index = 0, isVisible = true }: Props) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -106,28 +106,17 @@ export function BlogCard({ blog, index = 0, isVisible = true, author }: Props) {
         {/* Actions */}
         <div className="flex items-center justify-between pt-4 border-t-2 border-border group-hover:border-primary/20 transition-colors mt-auto">
           <div className="flex items-center gap-3">
-            {author?.image ? (
-              <Image
-                src={author.image}
-                alt={author.name}
-                width={32}
-                height={32}
-                className="w-8 h-8 rounded-full object-cover border border-primary"
-              />
-            ) : author?.name ? (
-              <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary flex items-center justify-center text-primary font-bold text-xs">
-                {author.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </div>
-            ) : null}
+            <Image
+              src={mehedi}
+              alt="Author"
+              width={32}
+              height={32}
+              className="w-8 h-8 rounded-full object-cover border border-primary"
+            />
 
-            {author?.name && (
-              <span className="font-medium text-foreground text-sm">
-                {author.name}
-              </span>
-            )}
+            <span className="font-medium text-foreground text-sm">
+              Md Mehedi Hasan
+            </span>
           </div>
 
           <Link

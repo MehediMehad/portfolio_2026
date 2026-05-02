@@ -1,3 +1,4 @@
+import { socialIcons, socialMedias } from "@/constants/socialMedias";
 import { getMyInfo } from "@/services/auth/getUserInfo";
 import { Platform } from "@/types";
 import {
@@ -13,27 +14,6 @@ import {
   LucideIcon,
 } from "lucide-react";
 export const Footer = async () => {
-  const myInfo = await getMyInfo();
-
-  if (!myInfo) {
-    return null;
-  }
-
-  // ✅ Better: use LucideIcon instead of JSX.Element
-  const socialIcons: Record<Platform, LucideIcon> = {
-    GitHub: GithubIcon,
-    LinkedIn: LinkedinIcon,
-    Facebook: Facebook,
-    Instagram: Instagram,
-    YouTube: Youtube,
-    Twitter: TwitterIcon,
-    Portfolio: GlobeIcon,
-  };
-
-  const portfolioUrl = myInfo.socialMedias?.find(
-    (sm) => sm.platformName === "Portfolio",
-  )?.url;
-
   return (
     <footer className="border-t-2 border-border pt-16 pb-8 mt-20">
       <div className="container mx-auto px-4">
@@ -42,26 +22,24 @@ export const Footer = async () => {
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-primary/10 border-2 border-primary flex items-center justify-center">
-                <span className="text-2xl font-extrabold text-primary">
-                  {myInfo.name[0] || "M"}
-                </span>
+                <span className="text-2xl font-extrabold text-primary">M</span>
               </div>
               <div>
                 <h3 className="text-xl font-bold text-foreground">
-                  {myInfo.name}
+                  Md Mehedi Hasan
                 </h3>
                 <p className="text-sm font-semibold text-primary">
-                  {myInfo?.designation}
+                  Full Stack Developer
                 </p>
               </div>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
-              {myInfo.shortBio ||
-                "Creating dynamic and responsive web experiences with modern technologies and a focus on user experience."}
+              Creating dynamic and responsive web experiences with modern
+              technologies and a focus on user experience.
             </p>
             {/* Dynamic Social Media Icons */}
             <div className="flex gap-3">
-              {myInfo?.socialMedias?.map((social, index: number) => {
+              {socialMedias?.map((social, index: number) => {
                 if (!social?.url) return null;
 
                 const Icon = socialIcons[social.platformName as Platform];
@@ -76,7 +54,9 @@ export const Footer = async () => {
                     rel="noopener noreferrer"
                     className="p-2.5 rounded-md bg-background border border-border hover:border-primary hover:text-primary transition-colors"
                   >
-                    <Icon className="w-5 h-5" />
+                    {socialIcons[social.platformName] || (
+                      <GlobeIcon className="w-4 h-4" />
+                    )}
                   </a>
                 );
               })}
@@ -118,10 +98,10 @@ export const Footer = async () => {
                     Email
                   </p>
                   <a
-                    href={`mailto:${myInfo.email}`}
+                    href={`mailto:mdmehedihasanmehad@gmail`}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
-                    {myInfo.email}
+                    mdmehedihasanmehad@gmail
                   </a>
                 </div>
               </li>
@@ -134,7 +114,7 @@ export const Footer = async () => {
                     Location
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    {myInfo.address}
+                    Dhaka, Bangladesh
                   </p>
                 </div>
               </li>
@@ -147,10 +127,10 @@ export const Footer = async () => {
                     Website
                   </p>
                   <a
-                    href={portfolioUrl}
+                    href="https://mehedihasanmehad.vercel.app"
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
-                    {portfolioUrl?.split("/")[2]}
+                    mehedihasanmehad.vercel.app
                   </a>
                 </div>
               </li>
@@ -162,7 +142,7 @@ export const Footer = async () => {
         <div className="pt-8 border-t-2 border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()}{" "}
-            <span className="text-primary font-semibold">{myInfo.name}</span>.
+            <span className="text-primary font-semibold">Md Mehedi Hasan</span>.
             All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">

@@ -6,10 +6,9 @@ import { BlogCard } from "@/components/shared/Card/BlogCard";
 
 type Props = {
   blogs: TBlog[];
-  author: { name: string; image: string };
 };
 
-export function FeaturedBlogs({ blogs, author }: Props) {
+export function FeaturedBlogs({ blogs }: Props) {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
@@ -38,7 +37,6 @@ export function FeaturedBlogs({ blogs, author }: Props) {
               blog={blog}
               index={index}
               isVisible={true}
-              author={author}
             />
           ))}
 

@@ -21,10 +21,6 @@ export const skills: TSkill[] = [
         level: "Next.js",
         icon: nextjs,
     },
-    // {
-    //     level: "TypeScript",
-    //     icon: typescript,
-    // },
     {
         level: "Node.js",
         icon: nodejs,
