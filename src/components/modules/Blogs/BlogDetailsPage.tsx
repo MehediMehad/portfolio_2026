@@ -217,7 +217,6 @@ const BlogDetailsPage = ({ blog, relatedBlogs, author }: Props) => {
               <BlogCard
                 key={relatedBlog.id}
                 blog={relatedBlog}
-                author={author}
                 index={index}
                 isVisible={true}
               />
