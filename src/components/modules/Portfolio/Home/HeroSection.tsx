@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { JSX } from "react";
 import { Platform, TUser } from "@/types";
+import mehedi from "@/assets/images/MehediHasan.png";
 
 type Props = {
   myInfo: TUser | null;
@@ -54,6 +55,8 @@ export function HeroSection({ myInfo }: Props) {
         }))
       : fallbackSkills;
 
+  console.log("skills 🤣🤣", skills);
+
   const socialIcons: Record<Platform, JSX.Element> = {
     GitHub: <GithubIcon className="w-5 h-5" />,
     LinkedIn: <LinkedinIcon className="w-5 h-5" />,
@@ -73,44 +76,33 @@ export function HeroSection({ myInfo }: Props) {
       <section id="home" className="py-10 overflow-hidden">
         <div
           ref={ref}
-          className={`container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
+          className={`container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
         >
           {/* Left Column: Profile Card */}
           <div className="lg:col-span-4 flex flex-col items-center">
-            <div className="w-full  border-2 border-border rounded-xl p-16 flex flex-col items-center text-center hover:border-primary transition-all duration-500 hover:shadow-[0_0_30px_rgba(28,199,105,0.1)] group">
+            <div className="w-full h-full md:min-h-[646px] border-2 border-border rounded-xl p-16 flex flex-col items-center text-center hover:border-primary transition-all duration-500 hover:shadow-[0_0_30px_rgba(28,199,105,0.1)] group">
               {/* Dynamic Profile Image */}
-              <div className="w-72 h-72 rounded-full bg-linear-to-r from-primary/20 to-primary/5 border-4 border-border group-hover:border-primary transition-all duration-500 flex items-center justify-center mb-6 overflow-hidden relative">
-                {myInfo.image ? (
-                  <Image
-                    src={myInfo.image}
-                    alt={myInfo.name || "Profile"}
-                    width={96}
-                    height={96}
-                    // priority
-                    className="w-full h-full object-cover rounded-full"
-                  />
-                ) : (
-                  <span className="text-5xl font-bold text-primary/50">
-                    {myInfo.name?.slice(0, 2).toUpperCase() || "MM"}
-                  </span>
-                )}
-                {/* Decorative glow */}
-                <div className="absolute inset-0 bg-primary/10 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="h-72 rounded-full overflow-hidden relative border-4 border-border">
+                <Image
+                  src={mehedi}
+                  alt="Mehedi Hasan"
+                  width={288}
+                  height={288}
+                  className="object-cover rounded-full"
+                  priority
+                />
               </div>
 
-              <h1 className="text-3xl font-bold text-foreground mb-2">
-                {myInfo.name}
+              <h1 className="text-3xl font-bold text-foreground mt-4">
+                Md Mehedi Hasan
               </h1>
 
-              <a
-                href={`mailto:${myInfo.email}`}
-                className="text-base text-muted-foreground hover:text-primary transition-colors mb-4"
-              >
-                {myInfo.email}
-              </a>
+              <p className="text-base text-muted-foreground hover:text-primary transition-colors mb-4">
+                mdmehedihasanmehad@gmail.com
+              </p>
 
               <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-semibold mb-8">
-                {myInfo.designation || "Full Stack Developer"}
+                Full Stack Developer
               </div>
 
               {/* Dynamic Social Media Links */}
@@ -133,7 +125,7 @@ export function HeroSection({ myInfo }: Props) {
           </div>
 
           {/* Right Column: About & Skills */}
-          <div className="lg:col-span-8 md:min-h-[646px] md:max-h-[646px] p-8 border-2 border-border border-l-4 border-l-primary rounded-l-xl flex flex-col gap-12">
+          <div className="lg:col-span-8 h-full md:min-h-[646px] md:max-h-[646px] p-8 border-2 border-border border-l-4 border-l-primary rounded-l-xl flex flex-col gap-12">
             {/* About Me */}
             <div
               className={`opacity-0 delay-200 ${isVisible ? "animate-fade-in-up" : ""}`}
