@@ -8,7 +8,8 @@ import mongoose from "@/assets/icons/Mongoose.js.png";
 import nextjs from "@/assets/icons/Next.js.png";
 import nodejs from "@/assets/icons/Node.js.png";
 import postgresql from "@/assets/icons/PostgresSQL.png";
-import react from "@/assets/icons/React (1).png";
+import prisma from "@/assets/icons/prism.png";
+
 
 type TSkill = {
     level: string;
@@ -17,17 +18,13 @@ type TSkill = {
 
 export const skills: TSkill[] = [
     {
-        level: "React",
-        icon: react,
-    },
-    {
         level: "Next.js",
         icon: nextjs,
     },
-    {
-        level: "TypeScript",
-        icon: typescript,
-    },
+    // {
+    //     level: "TypeScript",
+    //     icon: typescript,
+    // },
     {
         level: "Node.js",
         icon: nodejs,
@@ -37,16 +34,25 @@ export const skills: TSkill[] = [
         icon: express,
     },
     {
-        level: "Docker",
-        icon: docker,
+        level: "PostgreSQL",
+        icon: postgresql,
     },
 
     {
         level: "MongoDB",
         icon: mongodb,
     },
+
+    {
+        level: "Prisma",
+        icon: prisma,
+    },
     {
         level: "Mongoose",
         icon: mongoose,
+    },
+    {
+        level: "Docker",
+        icon: docker,
     },
 ];
