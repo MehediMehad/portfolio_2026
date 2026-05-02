@@ -22,7 +22,7 @@ const HomePage = async () => {
 
   return (
     <div className="">
-      <HeroSection myInfo={myInfo} />
+      <HeroSection />
       <FeaturedProjects projects={projects || []} />
       <FeaturedBlogs blogs={blogs || []} author={author} />
     </div>

@@ -1,75 +1,14 @@
 "use client";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Image from "next/image";
-import {
-  GithubIcon,
-  LinkedinIcon,
-  Facebook,
-  Instagram,
-  Youtube,
-  TwitterIcon, // TwitterIcon
-  GlobeIcon, // PortfolioIcon
-  CodeIcon,
-  LayoutIcon,
-} from "lucide-react";
-import { JSX } from "react";
-import { Platform, TUser } from "@/types";
+
 import mehedi from "@/assets/images/MehediHasan.png";
+import { skills } from "@/constants/skills";
+import { socialIcons, socialMedias } from "@/constants/socialMedias";
+import { GlobeIcon } from "lucide-react";
 
-type Props = {
-  myInfo: TUser | null;
-};
-
-export function HeroSection({ myInfo }: Props) {
+export function HeroSection() {
   const { ref, isVisible } = useScrollAnimation();
-
-  // Fallback skills if no data (optional)
-  const fallbackSkills = [
-    {
-      name: "Tailwind CSS",
-      icon: <LayoutIcon className="w-5 h-5 text-cyan-400" />,
-    },
-    {
-      name: "Javascript",
-      icon: <CodeIcon className="w-5 h-5 text-yellow-400" />,
-    },
-    { name: "React Js", icon: <CodeIcon className="w-5 h-5 text-blue-400" /> },
-    { name: "Next JS", icon: <LayoutIcon className="w-5 h-5 text-white" /> },
-  ];
-
-  const skills =
-    myInfo?.skills && myInfo.skills.length > 0
-      ? myInfo.skills.map((skill) => ({
-          name: skill.name,
-          icon: skill.icon ? (
-            <Image
-              src={skill.icon}
-              alt={skill.name}
-              width={24}
-              height={24}
-              className="w-5 h-5 object-contain"
-            />
-          ) : (
-            <CodeIcon className="w-5 h-5 text-blue-400" />
-          ),
-        }))
-      : fallbackSkills;
-
-  console.log("skills 🤣🤣", skills);
-
-  const socialIcons: Record<Platform, JSX.Element> = {
-    GitHub: <GithubIcon className="w-5 h-5" />,
-    LinkedIn: <LinkedinIcon className="w-5 h-5" />,
-    Facebook: <Facebook className="w-5 h-5" />,
-    Instagram: <Instagram className="w-5 h-5" />,
-    YouTube: <Youtube className="w-5 h-5" />,
-    Twitter: <TwitterIcon className="w-5 h-5" />,
-    Portfolio: <GlobeIcon className="w-5 h-5" />,
-  };
-
-  if (!myInfo) {
-    return <div className="text-center py-20">Loading profile...</div>;
-  }
 
   return (
     <div className="w-full sm:p-8">
@@ -105,9 +44,9 @@ export function HeroSection({ myInfo }: Props) {
                 Full Stack Developer
               </div>
 
-              {/* Dynamic Social Media Links */}
+              {/* Static Social Media Links */}
               <div className="flex gap-2">
-                {myInfo.socialMedias?.map((social) => (
+                {socialMedias.map((social) => (
                   <a
                     key={social.id}
                     href={social.url}
@@ -134,14 +73,20 @@ export function HeroSection({ myInfo }: Props) {
                 About Me
                 <div className="h-0.5 flex-1 bg-linear-to-r from-primary/50 to-transparent"></div>
               </h2>
-              <div className=" border-2 border-border rounded-xl p-8 transition-all duration-300">
+              <div className=" border-2 border-border rounded-xl p-8 transition-all duration-300 min-h-[250px]">
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  {myInfo.aboutMe || "No about information available."}
+                  Full-stack developer with 1+ year of production experience
+                  building scalable, production-ready web applications using
+                  React.js, Next.js, Node.js, and TypeScript. Skilled in SSR/SSG
+                  for SEO optimisation, API development, database management
+                  (PostgreSQL, MongoDB), and secure authentication (JWT).
+                  Passionate about writing clean, maintainable code and
+                  delivering efficient end-to-end solutions.
                 </p>
               </div>
             </div>
 
-            {/* Programming Skills */}
+            {/* Static Programming Skills */}
             <div
               className={`opacity-0 delay-300 ${isVisible ? "animate-fade-in-up" : ""}`}
             >
@@ -153,13 +98,20 @@ export function HeroSection({ myInfo }: Props) {
                 {skills.map((skill, index) => (
                   <div
                     key={index}
-                    className=" border-2 border-border rounded-lg p-4 flex items-center gap-3 hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_5px_15px_rgba(28,199,105,0.1)] group"
+                    className="border-2 border-border rounded-lg p-4 flex items-center gap-3 hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_5px_15px_rgba(28,199,105,0.1)] group"
                   >
-                    <div className="p-2 rounded-md bg-background border border-border group-hover:border-primary/30 transition-colors">
-                      {skill.icon}
+                    <div className="p-2 rounded-md bg-amber-50 border border-border group-hover:border-primary/30 transition-colors">
+                      <Image
+                        src={skill.icon}
+                        alt={skill.level}
+                        width={20}
+                        height={20}
+                        className="object-contain"
+                      />
                     </div>
+
                     <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                      {skill.name}
+                      {skill.level}
                     </span>
                   </div>
                 ))}

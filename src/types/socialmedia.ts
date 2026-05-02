@@ -5,5 +5,5 @@ export interface TSocialMedia {
     id: string
     platformName: Platform
     url: string
-    icon: string
+    image: string
 }
