@@ -1,8 +1,13 @@
+import CreateProjectForm from "@/components/modules/DashboardPages/CreateProjectForm";
+import { Suspense } from "react";
+
 const page = () => {
   return (
-    <div>
-      <h1>This is page component</h1>
-    </div>
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <CreateProjectForm />
+      </Suspense>
+    </>
   );
 };
 
