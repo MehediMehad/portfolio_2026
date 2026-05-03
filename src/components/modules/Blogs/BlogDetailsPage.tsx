@@ -214,12 +214,7 @@ const BlogDetailsPage = ({ blog, relatedBlogs, author }: Props) => {
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             {relatedBlogs.map((relatedBlog, index) => (
-              <BlogCard
-                key={relatedBlog.id}
-                blog={relatedBlog}
-                index={index}
-                isVisible={true}
-              />
+              <BlogCard key={relatedBlog.id} blog={relatedBlog} index={index} />
             ))}
           </div>
 

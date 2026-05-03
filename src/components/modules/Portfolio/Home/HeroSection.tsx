@@ -1,5 +1,5 @@
 "use client";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+// removed useScrollAnimation - no scroll animations wanted
 import Image from "next/image";
 
 import mehedi from "@/assets/images/MehediHasan.png";
@@ -8,15 +8,10 @@ import { socialIcons, socialMedias } from "@/constants/socialMedias";
 import { GlobeIcon } from "lucide-react";
 
 export function HeroSection() {
-  const { ref, isVisible } = useScrollAnimation();
-
   return (
     <div className="w-full sm:p-8">
       <section id="home" className="py-10 overflow-hidden">
-        <div
-          ref={ref}
-          className={`container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-        >
+        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
           {/* Left Column: Profile Card */}
           <div className="lg:col-span-4 flex flex-col items-center">
             <div className="w-full h-full md:min-h-[646px] border-2 border-border rounded-xl p-16 flex flex-col items-center text-center hover:border-primary transition-all duration-500 hover:shadow-[0_0_30px_rgba(28,199,105,0.1)] group">
@@ -66,9 +61,7 @@ export function HeroSection() {
           {/* Right Column: About & Skills */}
           <div className="lg:col-span-8 h-full md:min-h-[646px] md:max-h-[646px] p-8 border-2 border-border border-l-4 border-l-primary rounded-l-xl flex flex-col gap-12">
             {/* About Me */}
-            <div
-              className={`opacity-0 delay-200 ${isVisible ? "animate-fade-in-up" : ""}`}
-            >
+            <div>
               <h2 className="text-3xl font-bold text-primary mb-6 flex items-center gap-4">
                 About Me
                 <div className="h-0.5 flex-1 bg-linear-to-r from-primary/50 to-transparent"></div>
@@ -87,9 +80,7 @@ export function HeroSection() {
             </div>
 
             {/* Static Programming Skills */}
-            <div
-              className={`opacity-0 delay-300 ${isVisible ? "animate-fade-in-up" : ""}`}
-            >
+            <div>
               <h2 className="text-3xl font-bold text-primary mb-6 flex items-center gap-4">
                 Programming Skills
                 <div className="h-0.5 flex-1 bg-linear-to-r from-primary/50 to-transparent"></div>

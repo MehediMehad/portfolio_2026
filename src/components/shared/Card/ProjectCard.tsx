@@ -8,10 +8,9 @@ import { TProject } from "@/types/projects";
 interface Props {
   project: TProject;
   index?: number;
-  isVisible?: boolean;
 }
 
-export function ProjectCard({ project, index = 0, isVisible }: Props) {
+export function ProjectCard({ project, index = 0 }: Props) {
   // Color mapping for project types
   const typeColors: Record<string, string> = {
     Full_Stack: "bg-violet-500/10 text-violet-500 border-violet-500/30",
@@ -28,9 +27,7 @@ export function ProjectCard({ project, index = 0, isVisible }: Props) {
     Other: "bg-gray-500/10 text-gray-500 border-gray-500/30",
   };
   return (
-    <div
-      className={`border-2 border-border rounded-xl overflow-hidden flex flex-col hover:border-primary transition-all duration-500 hover:shadow-[0_10px_30px_rgba(28,199,105,0.15)] group opacity-0 ${isVisible ? `animate-fade-in-up delay-${index * 100}` : ""}`}
-    >
+    <div className="border-2 border-border rounded-xl overflow-hidden flex flex-col hover:border-primary transition-all duration-500 hover:shadow-[0_10px_30px_rgba(28,199,105,0.15)] group">
       {/* Image */}
       <div className="h-80 bg-linear-to-r from-secondary to-background border-b-2 border-border relative overflow-hidden group-hover:border-primary/50 transition-colors">
         {project.image ? (

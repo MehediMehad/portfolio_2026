@@ -77,7 +77,6 @@ const Projects = () => {
                   key={project.slug}
                   project={project}
                   index={index}
-                  isVisible={true} // Always visible on this page
                 />
               ))}
             </div>

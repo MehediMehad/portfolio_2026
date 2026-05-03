@@ -9,10 +9,9 @@ import mehedi from "@/assets/images/MehediHasan.png";
 interface Props {
   blog: TBlog;
   index?: number;
-  isVisible?: boolean;
 }
 
-export function BlogCard({ blog, index = 0, isVisible = true }: Props) {
+export function BlogCard({ blog, index = 0 }: Props) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -38,9 +37,7 @@ export function BlogCard({ blog, index = 0, isVisible = true }: Props) {
     typeColors[blog.type] || "bg-primary/10 text-primary border-primary/20";
 
   return (
-    <div
-      className={`border-2 border-border rounded-xl overflow-hidden flex flex-col hover:border-primary transition-all duration-500 hover:shadow-[0_10px_30px_rgba(28,199,105,0.15)] group opacity-0 ${isVisible ? `animate-fade-in-up delay-${index * 100}` : ""}`}
-    >
+    <div className="border-2 border-border rounded-xl overflow-hidden flex flex-col hover:border-primary transition-all duration-500 hover:shadow-[0_10px_30px_rgba(28,199,105,0.15)] group">
       {/* Image */}
       <div className="h-80 bg-linear-to-r from-secondary to-background border-b-2 border-border relative overflow-hidden group-hover:border-primary/50 transition-colors">
         {blog.image ? (
