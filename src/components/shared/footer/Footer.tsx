@@ -1,18 +1,8 @@
 import { socialIcons, socialMedias } from "@/constants/socialMedias";
-import { getMyInfo } from "@/services/auth/getUserInfo";
 import { Platform } from "@/types";
-import {
-  GithubIcon,
-  LinkedinIcon,
-  TwitterIcon,
-  MailIcon,
-  MapPinIcon,
-  GlobeIcon,
-  Facebook,
-  Instagram,
-  Youtube,
-  LucideIcon,
-} from "lucide-react";
+import { MailIcon, MapPinIcon, GlobeIcon } from "lucide-react";
+import profile from "@/assets/images/MehediHasan.png";
+import Image from "next/image";
 export const Footer = async () => {
   return (
     <footer className="border-t-2 border-border pt-16 pb-8 mt-20">
@@ -21,8 +11,14 @@ export const Footer = async () => {
           {/* Brand Column */}
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 border-2 border-primary flex items-center justify-center">
-                <span className="text-2xl font-extrabold text-primary">M</span>
+              <div className="w-12 h-12 rounded-xl bg-primary/10 border-2 border-primary overflow-hidden">
+                <Image
+                  src={profile}
+                  alt="Md Mehedi Hasan"
+                  width={48}
+                  height={48}
+                  className="object-cover w-full h-full"
+                />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-foreground">
