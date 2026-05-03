@@ -32,7 +32,7 @@ export const getAdminNavItems = (role: UserRole): NavSection[] => {
                 },
                 {
                     title: "Create Project",
-                    href: "/create-project",
+                    href: "/dashboard/create-project",
                     icon: "Plus",
                     roles: ["ADMIN"],
                 },
@@ -41,17 +41,16 @@ export const getAdminNavItems = (role: UserRole): NavSection[] => {
         {
             title: "Blogs",
             items: [
-
-                {
-                    title: "Create Blog",
-                    href: "/create-blog",
-                    icon: "Plus",
-                    roles: ["ADMIN"],
-                },
                 {
                     title: "My Blogs",
                     href: "/my-blogs",
                     icon: "LayoutDashboard", // ✅ String
+                    roles: ["ADMIN"],
+                },
+                {
+                    title: "Create Blog",
+                    href: "/create-blog",
+                    icon: "Plus",
                     roles: ["ADMIN"],
                 },
             ],
