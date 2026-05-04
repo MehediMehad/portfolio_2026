@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UploadCloud, LinkIcon, Type, FileText } from "lucide-react";
+import { LinkIcon, Type } from "lucide-react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,6 +9,9 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Controller } from "react-hook-form";
 import dynamic from "next/dynamic";
+import ImagePreviewer from "@/components/shared/ImageUploader/ImagePreviewer";
+import ImageUploader from "@/components/shared/ImageUploader/ImageUploader";
+import { createProject } from "@/services/projects";
 
 const QuillEditor = dynamic(
   () => import("@/components/shared/TextEditor/QuillEditor"),
@@ -21,23 +24,24 @@ const QuillEditor = dynamic(
 const createProjectSchema = z.object({
   title: z.string().min(1, "Project title is required"),
   overview: z.string().min(1, "Short overview is required"),
-  techStack: z.string().min(1, "Tech stack is required"),
+  techStack: z.array(z.string()).min(1),
   description: z
     .string()
     .min(1, "Project description is required")
     .refine((value) => value.replace(/<(.|\n)*?>/g, "").trim().length > 0, {
       message: "Project description is required",
     }),
-  liveUrl: z.string().url("Invalid live demo URL"),
-  githubUrl: z.string().url("Invalid GitHub URL"),
-  isFeatured: z.boolean().optional(),
+  liveURL: z.string().url("Invalid live demo URL"),
+  gitHubURL: z.string().url("Invalid GitHub URL"),
+  // isFeatured: z.boolean().optional(),
 });
 
 type CreateProjectFormData = z.infer<typeof createProjectSchema>;
 
 const CreateProjectForm = () => {
   const router = useRouter();
-  const [projectImage, setProjectImage] = useState<File | null>(null);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imagePreview, setImagePreview] = useState<string[]>([]);
 
   const {
     register,
@@ -50,32 +54,45 @@ const CreateProjectForm = () => {
     defaultValues: {
       title: "",
       overview: "",
-      techStack: "",
+      techStack: [],
       description: "",
-      liveUrl: "",
-      githubUrl: "",
-      isFeatured: false,
+      liveURL: "",
+      gitHubURL: "",
+      // isFeatured: false,
     },
   });
 
   const onSubmit: SubmitHandler<CreateProjectFormData> = async (data) => {
     try {
-      if (!projectImage) {
+      if (imageFiles.length === 0) {
         toast.error("Project image is required");
         return;
       }
 
+      const payload = {
+        ...data,
+        techStack: Array.isArray(data.techStack)
+          ? data.techStack
+          : String(data.techStack)
+              .split(",")
+              .map((item) => item.trim())
+              .filter(Boolean),
+      };
+
       const formData = new FormData();
-      formData.append("image", projectImage);
-      formData.append("data", JSON.stringify(data));
+      formData.append("image", imageFiles[0]);
+      formData.append("data", JSON.stringify(payload));
 
       // ekhane tomar createProject server action/API call korba
-      // const res = await createProject(formData);
+      const res = await createProject(formData);
 
-      toast.success("Project created successfully");
-      reset();
-      setProjectImage(null);
-      router.push("/dashboard/my-projects");
+      if (res.success) {
+        toast.success(res.message);
+        reset();
+        setImageFiles([]);
+        setImagePreview([]);
+        router.push("/dashboard/projects");
+      }
     } catch (error) {
       toast.error("Something went wrong");
       console.error(error);
@@ -118,33 +135,19 @@ const CreateProjectForm = () => {
                 Project Image <span className="text-red-400">*</span>
               </label>
 
-              <label className="flex h-28 cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-purple-400/30 bg-[#0b1222] text-gray-400 hover:border-purple-400 transition">
-                <UploadCloud size={30} className="mb-2" />
-                <span className="text-sm">
-                  {projectImage
-                    ? projectImage.name
-                    : "Click to upload or drag and drop"}
-                </span>
-                <span className="text-xs">PNG, JPG, JPEG, WEBP Max 5MB</span>
-
-                <input
-                  type="file"
-                  accept="image/png,image/jpeg,image/jpg,image/webp"
-                  hidden
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-
-                    if (!file) return;
-
-                    if (file.size > 5 * 1024 * 1024) {
-                      toast.error("Image size must be less than 5MB");
-                      return;
-                    }
-
-                    setProjectImage(file);
-                  }}
+              {imageFiles.length === 1 ? (
+                <ImagePreviewer
+                  imagePreview={imagePreview}
+                  setImagePreview={setImagePreview}
+                  setImageFiles={setImageFiles}
                 />
-              </label>
+              ) : (
+                <ImageUploader
+                  label="Click to upload or drag and drop"
+                  setImageFiles={setImageFiles}
+                  setImagePreview={setImagePreview}
+                />
+              )}
             </div>
 
             <div>
@@ -195,8 +198,27 @@ const CreateProjectForm = () => {
                 Tech Stack <span className="text-red-400">*</span>
               </label>
 
-              <input
+              {/* <input
                 {...register("techStack")}
+                placeholder="e.g. Next.js, Socket.io, Node.js, Express.js, Redis"
+                className="w-full rounded-lg border border-white/10 bg-[#0b1222] px-4 py-3 text-white placeholder-gray-500 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400"
+              /> */}
+
+              <input
+                {...register("techStack", {
+                  setValueAs: (value) => {
+                    if (Array.isArray(value)) return value;
+
+                    if (typeof value === "string") {
+                      return value
+                        .split(",")
+                        .map((item: string) => item.trim())
+                        .filter(Boolean);
+                    }
+
+                    return [];
+                  },
+                })}
                 placeholder="e.g. Next.js, Socket.io, Node.js, Express.js, Redis"
                 className="w-full rounded-lg border border-white/10 bg-[#0b1222] px-4 py-3 text-white placeholder-gray-500 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400"
               />
@@ -223,15 +245,15 @@ const CreateProjectForm = () => {
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                 />
                 <input
-                  {...register("liveUrl")}
+                  {...register("liveURL")}
                   placeholder="https://your-project.vercel.app"
                   className="w-full rounded-lg border border-white/10 bg-[#0b1222] py-3 pl-10 pr-4 text-white placeholder-gray-500 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400"
                 />
               </div>
 
-              {errors.liveUrl && (
+              {errors.liveURL && (
                 <p className="mt-1 text-sm text-red-400">
-                  {errors.liveUrl.message}
+                  {errors.liveURL.message}
                 </p>
               )}
             </div>
@@ -247,20 +269,20 @@ const CreateProjectForm = () => {
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                 />
                 <input
-                  {...register("githubUrl")}
+                  {...register("gitHubURL")}
                   placeholder="https://github.com/username/repository"
                   className="w-full rounded-lg border border-white/10 bg-[#0b1222] py-3 pl-10 pr-4 text-white placeholder-gray-500 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400"
                 />
               </div>
 
-              {errors.githubUrl && (
+              {errors.gitHubURL && (
                 <p className="mt-1 text-sm text-red-400">
-                  {errors.githubUrl.message}
+                  {errors.gitHubURL.message}
                 </p>
               )}
             </div>
 
-            <div>
+            {/* <div>
               <label className="flex items-center gap-3 text-sm font-medium">
                 <input
                   type="checkbox"
@@ -272,7 +294,7 @@ const CreateProjectForm = () => {
               <p className="ml-8 mt-1 text-xs text-gray-500">
                 Featured projects will be shown on the home page.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
 

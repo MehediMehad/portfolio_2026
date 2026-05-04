@@ -1,12 +1,65 @@
+"use server";
 // src/services/projects/index.ts
 import { defaultMeta } from "@/constants";
 import { serverFetch } from "@/lib/server-fetch";
 import { FetchResponse, TMeta, TProject, TProjectDetails } from "@/types";
+import { revalidateTag } from "next/cache";
+import { getCookie } from "../auth/tokenHandlers";
 
 interface GetProjectsParams {
     page?: number;
     limit?: number;
 }
+
+
+const TAG = "projects";
+
+
+// Create createProject
+export const createProject = async (formData: FormData) => {
+
+    console.log("image", formData);
+
+
+    try {
+        const accessToken = await getCookie("accessToken");
+        console.log(accessToken);
+
+
+        if (!accessToken) {
+            throw new Error("No access token found");
+        }
+
+        const response = await serverFetch.post("/projects", {
+            body: formData,
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+
+                // Do NOT set Content-Type here - browser will set multipart/form-data automatically
+            },
+        });
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || "Failed to create meal");
+        }
+
+        const result = await response.json();
+
+        revalidateTag(TAG, { expire: 0 });
+
+        return {
+            success: true,
+            data: result.data,
+            message: result.message || "Meal created successfully",
+        };
+    } catch (error: any) {
+        console.error("❌ createProject error:", error);
+        return {
+            success: false,
+            message: error?.message || "Failed to create meal",
+        };
+    }
+};
 
 export const getProjects = async (
     params: GetProjectsParams = {}
