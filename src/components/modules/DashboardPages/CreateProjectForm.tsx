@@ -55,7 +55,6 @@ const createProjectSchema = z.object({
     }),
   liveURL: z.string().url("Invalid live demo URL"),
   gitHubURL: z.string().url("Invalid GitHub URL"),
-  // isFeatured: z.boolean().optional(),
 });
 
 type CreateProjectFormData = z.infer<typeof createProjectSchema>;
@@ -81,7 +80,6 @@ const CreateProjectForm = () => {
       description: "",
       liveURL: "",
       gitHubURL: "",
-      // isFeatured: false,
     },
   });
 
