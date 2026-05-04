@@ -274,20 +274,6 @@ const CreateProjectForm = () => {
                 </p>
               )}
             </div>
-
-            {/* <div>
-              <label className="flex items-center gap-3 text-sm font-medium">
-                <input
-                  type="checkbox"
-                  {...register("isFeatured")}
-                  className="h-5 w-5 rounded border-white/20 bg-[#0b1222] accent-purple-500"
-                />
-                Mark this project as featured
-              </label>
-              <p className="ml-8 mt-1 text-xs text-gray-500">
-                Featured projects will be shown on the home page.
-              </p>
-            </div> */}
           </div>
         </div>
 
@@ -304,7 +290,6 @@ const CreateProjectForm = () => {
                 value={field.value}
                 onChange={field.onChange}
                 placeholder="Write a detailed description about your project..."
-                className="min-h-[650px] [&_.ql-toolbar]:border-white/10 [&_.ql-toolbar]:bg-[#0b1222] [&_.ql-toolbar]:text-white [&_.ql-container]:min-h-[590px] [&_.ql-container]:border-white/10 [&_.ql-container]:bg-[#0b1222] [&_.ql-editor]:min-h-[590px] [&_.ql-editor]:text-white [&_.ql-editor]:placeholder-gray-500"
               />
             )}
           />
