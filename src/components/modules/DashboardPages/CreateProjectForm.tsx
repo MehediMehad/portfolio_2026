@@ -12,6 +12,20 @@ import dynamic from "next/dynamic";
 import ImagePreviewer from "@/components/shared/ImageUploader/ImagePreviewer";
 import ImageUploader from "@/components/shared/ImageUploader/ImageUploader";
 import { createProject } from "@/services/projects";
+import MultiSelect from "@/components/shared/MultiSelect";
+
+const techStackOptions = [
+  { value: "Next.js", label: "Next.js" },
+  { value: "React", label: "React" },
+  { value: "TypeScript", label: "TypeScript" },
+  { value: "Node.js", label: "Node.js" },
+  { value: "Express.js", label: "Express.js" },
+  { value: "MongoDB", label: "MongoDB" },
+  { value: "PostgreSQL", label: "PostgreSQL" },
+  { value: "Redis", label: "Redis" },
+  { value: "Socket.io", label: "Socket.io" },
+  { value: "Tailwind CSS", label: "Tailwind CSS" },
+];
 
 const QuillEditor = dynamic(
   () => import("@/components/shared/TextEditor/QuillEditor"),
@@ -69,21 +83,10 @@ const CreateProjectForm = () => {
         return;
       }
 
-      const payload = {
-        ...data,
-        techStack: Array.isArray(data.techStack)
-          ? data.techStack
-          : String(data.techStack)
-              .split(",")
-              .map((item) => item.trim())
-              .filter(Boolean),
-      };
-
       const formData = new FormData();
       formData.append("image", imageFiles[0]);
-      formData.append("data", JSON.stringify(payload));
+      formData.append("data", JSON.stringify(data));
 
-      // ekhane tomar createProject server action/API call korba
       const res = await createProject(formData);
 
       if (res.success) {
@@ -198,29 +201,19 @@ const CreateProjectForm = () => {
                 Tech Stack <span className="text-red-400">*</span>
               </label>
 
-              {/* <input
-                {...register("techStack")}
-                placeholder="e.g. Next.js, Socket.io, Node.js, Express.js, Redis"
-                className="w-full rounded-lg border border-white/10 bg-[#0b1222] px-4 py-3 text-white placeholder-gray-500 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400"
-              /> */}
-
-              <input
-                {...register("techStack", {
-                  setValueAs: (value) => {
-                    if (Array.isArray(value)) return value;
-
-                    if (typeof value === "string") {
-                      return value
-                        .split(",")
-                        .map((item: string) => item.trim())
-                        .filter(Boolean);
-                    }
-
-                    return [];
-                  },
-                })}
-                placeholder="e.g. Next.js, Socket.io, Node.js, Express.js, Redis"
-                className="w-full rounded-lg border border-white/10 bg-[#0b1222] px-4 py-3 text-white placeholder-gray-500 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400"
+              <Controller
+                name="techStack"
+                control={control}
+                render={({ field }) => (
+                  <MultiSelect
+                    value={field.value}
+                    onChange={field.onChange}
+                    options={techStackOptions}
+                    placeholder="Select tech stack"
+                    searchPlaceholder="Search technology..."
+                    emptyMessage="No technology found."
+                  />
+                )}
               />
 
               <p className="mt-1 text-xs text-gray-500">
