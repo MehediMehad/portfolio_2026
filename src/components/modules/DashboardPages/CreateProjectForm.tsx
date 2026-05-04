@@ -7,12 +7,27 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Controller } from "react-hook-form";
+import dynamic from "next/dynamic";
+
+const QuillEditor = dynamic(
+  () => import("@/components/shared/TextEditor/QuillEditor"),
+  {
+    ssr: false,
+    loading: () => <p className="text-muted-foreground">Loading editor...</p>,
+  },
+);
 
 const createProjectSchema = z.object({
   title: z.string().min(1, "Project title is required"),
   overview: z.string().min(1, "Short overview is required"),
   techStack: z.string().min(1, "Tech stack is required"),
-  description: z.string().min(1, "Project description is required"),
+  description: z
+    .string()
+    .min(1, "Project description is required")
+    .refine((value) => value.replace(/<(.|\n)*?>/g, "").trim().length > 0, {
+      message: "Project description is required",
+    }),
   liveUrl: z.string().url("Invalid live demo URL"),
   githubUrl: z.string().url("Invalid GitHub URL"),
   isFeatured: z.boolean().optional(),
@@ -27,6 +42,7 @@ const CreateProjectForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<CreateProjectFormData>({
@@ -265,22 +281,18 @@ const CreateProjectForm = () => {
             Project Description <span className="text-red-400">*</span>
           </label>
 
-          <div className="overflow-hidden rounded-lg border border-white/10 bg-[#0b1222]">
-            <div className="flex items-center gap-4 border-b border-white/10 px-4 py-3 text-sm text-gray-300">
-              <span>Paragraph</span>
-              <b>B</b>
-              <i>I</i>
-              <u>U</u>
-              <FileText size={17} />
-              <LinkIcon size={17} />
-            </div>
-
-            <textarea
-              {...register("description")}
-              placeholder="Write a detailed description about your project..."
-              className="min-h-[570px] w-full resize-none bg-transparent p-5 text-white placeholder-gray-500 focus:outline-none"
-            />
-          </div>
+          <Controller
+            name="description"
+            control={control}
+            render={({ field }) => (
+              <QuillEditor
+                value={field.value}
+                onChange={field.onChange}
+                placeholder="Write a detailed description about your project..."
+                className="min-h-[650px] [&_.ql-toolbar]:border-white/10 [&_.ql-toolbar]:bg-[#0b1222] [&_.ql-toolbar]:text-white [&_.ql-container]:min-h-[590px] [&_.ql-container]:border-white/10 [&_.ql-container]:bg-[#0b1222] [&_.ql-editor]:min-h-[590px] [&_.ql-editor]:text-white [&_.ql-editor]:placeholder-gray-500"
+              />
+            )}
+          />
 
           {errors.description && (
             <p className="mt-1 text-sm text-red-400">
