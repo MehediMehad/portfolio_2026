@@ -14,7 +14,7 @@ const QuillEditor = dynamic(
   () => import("@/components/shared/TextEditor/QuillEditor"),
   {
     ssr: false,
-    loading: () => <p className="text-muted-foreground">Loading editor...</p>,
+    loading: () => <p className="text-muted-foreground">Loading...</p>,
   },
 );
 
