@@ -35,6 +35,14 @@ const QuillEditor = dynamic(
   },
 );
 
+const QuillViewer = dynamic(
+  () => import("@/components/shared/TextEditor/QuillViewer"),
+  {
+    ssr: false,
+    loading: () => <p className="text-muted-foreground">Loading...</p>,
+  },
+);
+
 const createProjectSchema = z.object({
   title: z.string().min(1, "Project title is required"),
   overview: z.string().min(1, "Short overview is required"),
@@ -56,6 +64,7 @@ const CreateProjectForm = () => {
   const router = useRouter();
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [imagePreview, setImagePreview] = useState<string[]>([]);
+  const [isPreview, setIsPreview] = useState(false);
 
   const {
     register,
@@ -278,20 +287,34 @@ const CreateProjectForm = () => {
         </div>
 
         <div className="rounded-xl border border-white/10 bg-[#070d1a]/80 p-6 shadow-[0_0_40px_rgba(168,85,247,0.08)]">
-          <label className="mb-5 block text-lg font-semibold text-purple-400">
-            Project Description <span className="text-red-400">*</span>
-          </label>
+          <div className="flex items-center justify-between mb-5">
+            <label className="text-lg font-semibold text-purple-400">
+              Project Description <span className="text-red-400">*</span>
+            </label>
+
+            <button
+              type="button"
+              onClick={() => setIsPreview(!isPreview)}
+              className="rounded-md border border-white/10 bg-[#0b1222] px-4 py-2 text-sm text-gray-300 hover:bg-[#111827] transition"
+            >
+              {isPreview ? "Edit" : "Preview"}
+            </button>
+          </div>
 
           <Controller
             name="description"
             control={control}
-            render={({ field }) => (
-              <QuillEditor
-                value={field.value}
-                onChange={field.onChange}
-                placeholder="Write a detailed description about your project..."
-              />
-            )}
+            render={({ field }) =>
+              isPreview ? (
+                <QuillViewer value={field.value} />
+              ) : (
+                <QuillEditor
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Write a detailed description about your project..."
+                />
+              )
+            }
           />
 
           {errors.description && (

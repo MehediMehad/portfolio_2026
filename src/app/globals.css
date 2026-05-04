@@ -230,3 +230,18 @@
 .rounded-quill-container .ql-snow {
   box-shadow: none !important;
 }
+
+/* Viewer mode */
+.rounded-quill-container.quill-viewer-mode .ql-container {
+  border-top: 1px solid hsl(228 37% 22%) !important;
+  border-radius: 12px !important;
+}
+
+.rounded-quill-container.quill-viewer-mode .ql-editor {
+  min-height: 70vh !important;
+  padding: 24px 18px !important;
+}
+
+.rounded-quill-container.quill-viewer-mode .ql-toolbar {
+  display: none !important;
+}

@@ -1,4 +1,5 @@
 "use client";
+
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 
@@ -8,12 +9,14 @@ interface QuillViewerProps {
 
 const QuillViewer = ({ value }: QuillViewerProps) => {
   return (
-    <ReactQuill
-      value={value}
-      readOnly
-      theme="bubble"
-      className="quill-viewer-mode"
-    />
+    <div className="rounded-quill-container quill-viewer-mode">
+      <ReactQuill
+        value={value}
+        readOnly
+        theme="snow"
+        modules={{ toolbar: false }}
+      />
+    </div>
   );
 };
 
