@@ -2,6 +2,7 @@ import BlogSearchFilters from "@/components/modules/Blogs/BlogSearchFilters";
 import { BlogCard } from "@/components/shared/Card/BlogCard";
 import TablePagination from "@/components/shared/TablePagination";
 import { TableSkeleton } from "@/components/shared/TableSkeleton";
+import { queryStringFormatter } from "@/lib/formatters";
 import { getBlogs } from "@/services/blogs";
 import { BlogType, TBlog } from "@/types";
 import { Suspense } from "react";
@@ -27,21 +28,13 @@ const BlogsPage = async ({
 }) => {
   const searchParamsObj = await searchParams;
 
-  const page = Number(searchParamsObj.page) || 1;
-  const limit = Number(searchParamsObj.limit) || 9;
-  const searchTerm =
-    typeof searchParamsObj.searchTerm === "string"
-      ? searchParamsObj.searchTerm
-      : undefined;
-  const type =
-    typeof searchParamsObj.type === "string" ? searchParamsObj.type : undefined;
-
-  const blogsResponse = await getBlogs({
-    page,
-    limit,
-    searchTerm,
-    type,
+  const queryString = queryStringFormatter({
+    limit: "9",
+    page: "1",
+    ...searchParamsObj,
   });
+
+  const blogsResponse = await getBlogs(queryString);
 
   const blogs: TBlog[] = blogsResponse?.data || [];
 

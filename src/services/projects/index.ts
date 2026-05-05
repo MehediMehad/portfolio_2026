@@ -61,23 +61,21 @@ export const createProject = async (formData: FormData) => {
     }
 };
 
-export async function getBlogs(queryString?: string) {
+export const getProjects = async (queryString?: string) => {
     try {
         const searchParams = new URLSearchParams(queryString);
 
         const page = searchParams.get("page") || "1";
         const searchTerm = searchParams.get("searchTerm") || "all";
-        const type = searchParams.get("type") || "all";
 
         const response = await serverFetch.get(
-            `/blogs${queryString ? `?${queryString}` : ""}`,
+            `/projects${queryString ? `?${queryString}` : ""}`,
             {
                 next: {
                     tags: [
-                        "blogs-list",
-                        `blogs-page-${page}`,
-                        `blogs-search-${searchTerm}`,
-                        `blogs-type-${type}`,
+                        "projects-list",
+                        `projects-page-${page}`,
+                        `projects-search-${searchTerm}`,
                     ],
                     revalidate: 180,
                 },
@@ -100,6 +98,7 @@ export async function getBlogs(queryString?: string) {
         };
     }
 }
+
 export const getProjectBySlug = async (slug: string) => {
     try {
         const res = await serverFetch.get(`/projects/${slug}`, {

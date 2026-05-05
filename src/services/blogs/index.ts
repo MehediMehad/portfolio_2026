@@ -3,58 +3,45 @@ import { defaultMeta } from "@/constants";
 import { serverFetch } from "@/lib/server-fetch";
 import { FetchResponse, TBlog, TBlogDetails, TMeta, TRelatedBlog } from "@/types";
 
-interface GetProjectsParams {
-    searchTerm?: string;
-    page?: number;
-    limit?: number;
-    type?: string;
-}
-
-export const getBlogs = async (
-    params: GetProjectsParams = {}
-): Promise<{ meta: TMeta; data: TBlog[] }> => {
-    const { page = 1, limit = 6, type, searchTerm } = params;
+export const getBlogs = async (queryString?: string) => {
     try {
-        const queryParams = new URLSearchParams({
-            page: String(page),
-            limit: String(limit),
-        });
+        const searchParams = new URLSearchParams(queryString);
 
-        if (searchTerm) {
-            queryParams.set("searchTerm", searchTerm);
-        }
+        const page = searchParams.get("page") || "1";
+        const searchTerm = searchParams.get("searchTerm") || "all";
+        const type = searchParams.get("type") || "all";
 
-        if (type && type !== "All") {
-            queryParams.set("type", type);
-        }
+        const response = await serverFetch.get(
+            `/blogs${queryString ? `?${queryString}` : ""}`,
+            {
+                next: {
+                    tags: [
+                        "blogs-list",
+                        `blogs-page-${page}`,
+                        `blogs-search-${searchTerm}`,
+                        `blogs-type-${type}`,
+                    ],
+                    revalidate: 180,
+                },
+            }
+        );
 
-        const res = await serverFetch.get(`/blogs?${queryParams}`, {
-            cache: "no-store",
-        });
-
-        if (!res.ok) {
-            throw new Error(`HTTP Error: ${res.status}`);
-        }
-
-        const result: FetchResponse<TBlog[]> = await res.json();
-
-        if (!result.success) {
-            throw new Error(result.message);
-        }
+        const result = await response.json();
+        return result;
+    } catch (error: any) {
+        console.log(error);
 
         return {
-            meta: result.meta ?? defaultMeta,
-            data: result.data ?? [],
-        };
-    } catch (error) {
-        console.error("❌ getBlogs error:", error);
-        return {
-            meta: defaultMeta,
+            success: false,
+            message: `${process.env.NODE_ENV === "development"
+                ? error.message
+                : "Something went wrong"
+                }`,
             data: [],
+            meta: defaultMeta,
         };
     }
-};
-
+}
 export const getBlogBySlug = async (slug: string) => {
     try {
         const res = await serverFetch.get(`/blogs/${slug}`, {
