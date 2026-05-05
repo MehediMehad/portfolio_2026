@@ -25,8 +25,8 @@ export const getAdminNavItems = (role: UserRole): NavSection[] => {
             title: "Projects",
             items: [
                 {
-                    title: "My Projects",
-                    href: "/my-projects",
+                    title: "Projects",
+                    href: "/dashboard/projects",
                     icon: "LayoutDashboard", // ✅ String
                     roles: ["ADMIN"],
                 },
@@ -42,14 +42,14 @@ export const getAdminNavItems = (role: UserRole): NavSection[] => {
             title: "Blogs",
             items: [
                 {
-                    title: "My Blogs",
-                    href: "/my-blogs",
+                    title: "Blogs",
+                    href: "/dashboard/blogs",
                     icon: "LayoutDashboard", // ✅ String
                     roles: ["ADMIN"],
                 },
                 {
                     title: "Create Blog",
-                    href: "/create-blog",
+                    href: "/dashboard/create-blog",
                     icon: "Plus",
                     roles: ["ADMIN"],
                 },
@@ -61,13 +61,13 @@ export const getAdminNavItems = (role: UserRole): NavSection[] => {
             items: [
                 {
                     title: "Change Password",
-                    href: "/change-password",
+                    href: "/dashboard/change-password",
                     icon: "Settings", // ✅ String
                     roles: ["PATIENT"],
                 },
                 {
                     title: "My Profile",
-                    href: `/my-profile`,
+                    href: `/dashboard/my-profile`,
                     icon: "User",
                     roles: ["ADMIN"],
                 },

@@ -65,7 +65,7 @@ export function ProjectCard({ project, index = 0 }: Props) {
         </h3>
 
         <p className="text-muted-foreground text-sm mb-6 line-clamp-3 flex-1">
-          {project.description}
+          {project.overview}
         </p>
 
         {/* Tech Stack */}

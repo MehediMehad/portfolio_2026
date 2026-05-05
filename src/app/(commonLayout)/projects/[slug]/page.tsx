@@ -1,4 +1,3 @@
-// src/app/(commonLayout)/projects/[slug]/page.tsx
 import ProjectDetailsPage from "@/components/modules/Projects/ProjectDetailsPage";
 import { getProjectBySlug } from "@/services/projects";
 
