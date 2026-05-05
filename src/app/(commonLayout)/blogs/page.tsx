@@ -15,9 +15,6 @@ const blogTypes: ("All" | BlogType)[] = [
   "Personal",
   "Lifestyle",
   "Health",
-  "Travel",
-  "Food",
-  "Entertainment",
   "Education",
 ];
 
@@ -53,8 +50,8 @@ const BlogsPage = async ({
         <Suspense fallback={<TableSkeleton columns={3} />}>
           {blogs.length > 0 ? (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {blogs.map((blog, index) => (
-                <BlogCard key={blog.slug} blog={blog} index={index} />
+              {blogs.map((blog) => (
+                <BlogCard key={blog.slug} blog={blog} />
               ))}
             </div>
           ) : (

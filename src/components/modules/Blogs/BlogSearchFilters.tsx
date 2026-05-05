@@ -65,8 +65,8 @@ const BlogSearchFilters = ({ blogTypes }: BlogSearchFiltersProps) => {
     searchParams.get("searchTerm") || searchParams.get("type");
 
   return (
-    <div className="flex w-full flex-col gap-4 md:w-auto">
-      {/* <div className="relative">
+    <div className="flex w-full flex-col md:flex-row items-center justify-center gap-4 md:w-auto">
+      <div className="relative">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           placeholder="Search blogs..."
@@ -74,7 +74,7 @@ const BlogSearchFilters = ({ blogTypes }: BlogSearchFiltersProps) => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full pl-10 md:w-[280px]"
         />
-      </div> */}
+      </div>
 
       <div className="flex flex-wrap gap-2">
         {blogTypes.map((type) => (
@@ -91,11 +91,11 @@ const BlogSearchFilters = ({ blogTypes }: BlogSearchFiltersProps) => {
           </button>
         ))}
 
-        {hasActiveFilters && (
+        {/* {hasActiveFilters && (
           <Button variant="outline" onClick={handleClearFilters}>
             Clear Filters
           </Button>
-        )}
+        )} */}
       </div>
     </div>
   );
