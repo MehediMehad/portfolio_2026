@@ -1,17 +1,20 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLinkIcon, GithubIcon, ArrowRightIcon } from "lucide-react";
+import {
+  ExternalLinkIcon,
+  GithubIcon,
+  ArrowRightIcon,
+  Trash2Icon,
+  PencilIcon,
+} from "lucide-react";
 import { TProject } from "@/types/projects";
 
 interface Props {
   project: TProject;
-  index?: number;
+  isAdmin?: boolean;
 }
 
-export function ProjectCard({ project, index = 0 }: Props) {
-  // Color mapping for project types
+export function ProjectCard({ project, isAdmin = false }: Props) {
   const typeColors: Record<string, string> = {
     Full_Stack: "bg-violet-500/10 text-violet-500 border-violet-500/30",
     Frontend: "bg-blue-500/10 text-blue-500 border-blue-500/30",
@@ -26,10 +29,24 @@ export function ProjectCard({ project, index = 0 }: Props) {
     Open_Source: "bg-lime-500/10 text-lime-500 border-lime-500/30",
     Other: "bg-gray-500/10 text-gray-500 border-gray-500/30",
   };
+
   return (
     <div className="border-2 border-border rounded-xl overflow-hidden flex flex-col hover:border-primary transition-all duration-500 hover:shadow-[0_10px_30px_rgba(28,199,105,0.15)] group">
       {/* Image */}
       <div className="h-80 bg-linear-to-r from-secondary to-background border-b-2 border-border relative overflow-hidden group-hover:border-primary/50 transition-colors">
+        {/* 🔥 Admin Actions */}
+        {isAdmin && (
+          <div className="absolute top-4 right-4 z-10 gap-2 hidden group-hover:flex transition-all duration-500">
+            <button className="p-2 rounded-md bg-background/80 backdrop-blur border border-border text-muted-foreground hover:text-primary hover:border-primary transition-colors">
+              <PencilIcon className="w-4 h-4" />
+            </button>
+
+            <button className="p-2 rounded-md bg-background/80 backdrop-blur border border-border text-muted-foreground hover:text-red-500 hover:border-red-500 transition-colors">
+              <Trash2Icon className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
         {project.image ? (
           <Image
             src={project.image}
@@ -52,7 +69,10 @@ export function ProjectCard({ project, index = 0 }: Props) {
             {project.types.map((type) => (
               <span
                 key={type}
-                className={`inline-block px-3 py-1 text-xs font-bold rounded-md border ${typeColors[type] || "bg-primary/10 text-primary border-primary/20"}`}
+                className={`inline-block px-3 py-1 text-xs font-bold rounded-md border ${
+                  typeColors[type] ||
+                  "bg-primary/10 text-primary border-primary/20"
+                }`}
               >
                 {type.replace("_", " ")}
               </span>
