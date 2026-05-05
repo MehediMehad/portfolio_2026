@@ -113,7 +113,7 @@ const CreateProjectForm = () => {
     <div className="w-full text-white">
       <div className="mb-7 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-semibold">Create Project 2</h1>
+          <h1 className="text-3xl font-semibold">Create Project</h1>
           <p className="mt-2 text-sm text-gray-400">
             Add your project details. All fields marked with * are required.
           </p>
