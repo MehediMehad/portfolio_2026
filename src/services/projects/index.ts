@@ -129,6 +129,49 @@ export const getProjectBySlug = async (slug: string) => {
     }
 };
 
+// Update project
+export const updateProject = async (slug: string, formData: FormData) => {
+    try {
+        const accessToken = await getCookie("accessToken");
+
+        if (!accessToken) {
+            throw new Error("No access token found");
+        }
+
+        const response = await serverFetch.patch(`/projects/${slug}`, {
+            body: formData,
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+
+        console.log("response", response);
+
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || "Failed to update project");
+        }
+
+        const result = await response.json();
+
+        revalidateProjects(slug, result?.data?.slug || result?.data?.slug);
+
+        return {
+            success: true,
+            data: result.data,
+            message: result.message || "Project updated successfully",
+        };
+    } catch (error: any) {
+        console.error("❌ updateProject error:", error);
+
+        return {
+            success: false,
+            message: error?.message || "Failed to update project",
+        };
+    }
+};
+
 // Soft delete project
 export const softDeleteProject = async (id: string, slug?: string) => {
     try {

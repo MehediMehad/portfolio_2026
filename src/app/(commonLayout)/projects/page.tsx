@@ -18,6 +18,7 @@ const ProjectsPage = async ({
   const queryString = queryStringFormatter({
     limit: "6",
     page: "1",
+    is_public: "true",
     ...searchParamsObj,
   });
 
@@ -38,12 +39,8 @@ const ProjectsPage = async ({
         <Suspense fallback={<TableSkeleton columns={3} />}>
           {projects.length > 0 ? (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {projects.map((project, index) => (
-                <ProjectCard
-                  key={project.slug}
-                  project={project}
-                  index={index}
-                />
+              {projects.map((project) => (
+                <ProjectCard key={project.slug} project={project} />
               ))}
             </div>
           ) : (

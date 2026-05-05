@@ -17,21 +17,17 @@ export interface TProject {
 
 
 export interface TProjectDetails {
-    id: string
-    image: string
-    title: string
-    slug: string
-    overview: string
-    description: string
-    types: string[]
-    techStack: string[]
-    features: string[]
-    whatILearned: string[]
-    futureImprovements: string[]
-    liveURL: string
-    gitHubURL: string
-    is_public: boolean
-    isDeleted: boolean
-    createdAt: string
-    updatedAt: string
+    id: string;
+    image: string;
+    title: string;
+    slug: string;
+    overview: string;
+    description: string;
+    techStack: string[];
+    liveURL: string;
+    gitHubURL: string;
+    is_public: boolean;
+    isDeleted: boolean;
+    createdAt: Date;
+    updatedAt: Date;
 }

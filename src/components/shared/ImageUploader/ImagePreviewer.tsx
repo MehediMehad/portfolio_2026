@@ -8,7 +8,7 @@ type TImagePreviewer = {
   imagePreview: string[];
   setImagePreview: React.Dispatch<React.SetStateAction<string[]>>;
   existingImage?: string;
-  setExistingImage?: React.Dispatch<React.SetStateAction<string | null>>;
+  setExistingImage?: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const ImagePreviewer = ({
