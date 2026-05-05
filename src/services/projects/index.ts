@@ -61,7 +61,7 @@ export const createProject = async (formData: FormData) => {
     }
 };
 
-export const getProjects = async (
+export const getProjects2 = async (
     params: GetProjectsParams = {}
 ): Promise<{ meta: TMeta; data: TProject[] }> => {
     const { page = 1, limit = 6 } = params;
@@ -98,6 +98,43 @@ export const getProjects = async (
     }
 };
 
+export async function getProjects(queryString?: string) {
+    try {
+        const searchParams = new URLSearchParams(queryString);
+
+        const page = searchParams.get("page") || "1";
+        const searchTerm = searchParams.get("searchTerm") || "all";
+
+        const response = await serverFetch.get(
+            `/projects${queryString ? `?${queryString}` : ""}`,
+            {
+                next: {
+                    tags: [
+                        "projects-list",
+                        `projects-page-${page}`,
+                        `projects-search-${searchTerm}`,
+                    ],
+                    revalidate: 180,
+                },
+            }
+        );
+
+        const result = await response.json();
+        return result;
+    } catch (error: any) {
+        console.log(error);
+
+        return {
+            success: false,
+            message: `${process.env.NODE_ENV === "development"
+                ? error.message
+                : "Something went wrong"
+                }`,
+            data: [],
+            meta: defaultMeta,
+        };
+    }
+}
 export const getProjectBySlug = async (slug: string) => {
     try {
         const res = await serverFetch.get(`/projects/${slug}`, {
