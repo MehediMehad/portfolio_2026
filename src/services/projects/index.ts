@@ -1,30 +1,31 @@
 "use server";
+
 // src/services/projects/index.ts
 import { defaultMeta } from "@/constants";
 import { serverFetch } from "@/lib/server-fetch";
-import { FetchResponse, TMeta, TProject, TProjectDetails } from "@/types";
+import { FetchResponse, TProjectDetails } from "@/types";
 import { revalidateTag } from "next/cache";
 import { getCookie } from "../auth/tokenHandlers";
 
-interface GetProjectsParams {
-    page?: number;
-    limit?: number;
-}
-
-
 const TAG = "projects";
 
+const revalidateProjects = (id?: string, slug?: string) => {
+    revalidateTag(TAG, { expire: 0 });
+    revalidateTag("projects-list", { expire: 0 });
 
-// Create createProject
+    if (id) {
+        revalidateTag(`project-${id}`, { expire: 0 });
+    }
+
+    if (slug) {
+        revalidateTag(`project-${slug}`, { expire: 0 });
+    }
+};
+
+// Create project
 export const createProject = async (formData: FormData) => {
-
-    console.log("image", formData);
-
-
     try {
         const accessToken = await getCookie("accessToken");
-        console.log(accessToken);
-
 
         if (!accessToken) {
             throw new Error("No access token found");
@@ -34,33 +35,34 @@ export const createProject = async (formData: FormData) => {
             body: formData,
             headers: {
                 Authorization: `Bearer ${accessToken}`,
-
-                // Do NOT set Content-Type here - browser will set multipart/form-data automatically
             },
         });
+
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.message || "Failed to create meal");
+            throw new Error(errorData.message || "Failed to create project");
         }
 
         const result = await response.json();
 
-        revalidateTag(TAG, { expire: 0 });
+        revalidateProjects(result?.data?._id, result?.data?.slug);
 
         return {
             success: true,
             data: result.data,
-            message: result.message || "Meal created successfully",
+            message: result.message || "Project created successfully",
         };
     } catch (error: any) {
         console.error("❌ createProject error:", error);
+
         return {
             success: false,
-            message: error?.message || "Failed to create meal",
+            message: error?.message || "Failed to create project",
         };
     }
 };
 
+// Get all projects
 export const getProjects = async (queryString?: string) => {
     try {
         const searchParams = new URLSearchParams(queryString);
@@ -73,6 +75,7 @@ export const getProjects = async (queryString?: string) => {
             {
                 next: {
                     tags: [
+                        TAG,
                         "projects-list",
                         `projects-page-${page}`,
                         `projects-search-${searchTerm}`,
@@ -89,20 +92,24 @@ export const getProjects = async (queryString?: string) => {
 
         return {
             success: false,
-            message: `${process.env.NODE_ENV === "development"
-                ? error.message
-                : "Something went wrong"
-                }`,
+            message:
+                process.env.NODE_ENV === "development"
+                    ? error.message
+                    : "Something went wrong",
             data: [],
             meta: defaultMeta,
         };
     }
-}
+};
 
+// Get project by slug
 export const getProjectBySlug = async (slug: string) => {
     try {
         const res = await serverFetch.get(`/projects/${slug}`, {
-            cache: "no-store",
+            next: {
+                tags: [TAG, `project-${slug}`],
+                revalidate: 180,
+            },
         });
 
         if (!res.ok) {
@@ -120,4 +127,43 @@ export const getProjectBySlug = async (slug: string) => {
         console.error("❌ getProjectBySlug error:", error);
         return null;
     }
-}
+};
+
+// Soft delete project
+export const softDeleteProject = async (id: string, slug?: string) => {
+    try {
+        const accessToken = await getCookie("accessToken");
+
+        if (!accessToken) {
+            throw new Error("No access token found");
+        }
+
+        const response = await serverFetch.patch(`/projects/${id}/soft-delete`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || "Failed to delete project");
+        }
+
+        const result = await response.json();
+
+        revalidateProjects(id, slug || result?.data?.slug);
+
+        return {
+            success: true,
+            data: result.data,
+            message: result.message || "Project deleted successfully",
+        };
+    } catch (error: any) {
+        console.error("❌ softDeleteProject error:", error);
+
+        return {
+            success: false,
+            message: error?.message || "Failed to delete project",
+        };
+    }
+};
