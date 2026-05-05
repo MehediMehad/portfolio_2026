@@ -24,7 +24,7 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full bg-background/40 backdrop-blur supports-backdrop-filter:bg-background/60 border-b border-border">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         {/* Left */}
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/dashboard" className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full overflow-hidden ring-1 ring-white/10">
             <Image
               src={profile}

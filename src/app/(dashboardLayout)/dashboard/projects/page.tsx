@@ -1,4 +1,4 @@
-import { AdminProjectCard } from "@/components/shared/Card/AdminProjectCard";
+import { ProjectCard } from "@/components/shared/Card/ProjectCard";
 import TablePagination from "@/components/shared/TablePagination";
 import { TableSkeleton } from "@/components/shared/TableSkeleton";
 import { queryStringFormatter } from "@/lib/formatters";
@@ -31,7 +31,7 @@ const DashboardProjectsPage = async ({
         {projects.length > 0 ? (
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <AdminProjectCard key={project.slug} project={project} isAdmin />
+              <ProjectCard key={project.slug} project={project} isAdmin />
             ))}
           </div>
         ) : (

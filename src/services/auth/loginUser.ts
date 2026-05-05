@@ -8,7 +8,8 @@ import { FieldValues } from "react-hook-form";
 
 export const loginUser = async (userData: FieldValues) => {
     try {
-        const res = await fetch(`https://portfolio-server-neon-alpha.vercel.app/api/v1/auth/login`, {
+        // https://portfolio-server-neon-alpha.vercel.app 
+        const res = await fetch(`http://localhost:5000/api/v1/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
