@@ -65,7 +65,7 @@ const BlogDetailsPage = ({ blog, relatedBlogs }: Props) => {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           {/* Left Content */}
           <div className="lg:col-span-8">
-            <div className="rounded-2xl border border-border p-6 shadow-sm">
+            <div className="rounded-2xl border border-border p-6 shadow-sm md:p-10">
               {/* Blog Meta */}
               <div className="mb-6 flex flex-wrap items-center gap-3">
                 <span
@@ -94,7 +94,7 @@ const BlogDetailsPage = ({ blog, relatedBlogs }: Props) => {
               {/* <div className="mb-10 border-t border-border" /> */}
 
               {/* Content */}
-              <div className="">
+              <div className="rounded-2xl border border-border/60 bg-background/20 p-1">
                 <QuillViewer value={blog.content} />
               </div>
             </div>
