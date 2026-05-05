@@ -8,14 +8,14 @@ import {
 } from "lucide-react";
 import { TBlogDetails, TRelatedBlog } from "@/types";
 import { BlogCard } from "@/components/shared/Card/BlogCard";
+import QuillViewer from "@/components/shared/TextEditor/QuillViewer";
 
 type Props = {
   blog: TBlogDetails;
   relatedBlogs: TRelatedBlog[];
-  author: { name: string; image: string };
 };
 
-const BlogDetailsPage = ({ blog, relatedBlogs, author }: Props) => {
+const BlogDetailsPage = ({ blog, relatedBlogs }: Props) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -65,7 +65,7 @@ const BlogDetailsPage = ({ blog, relatedBlogs, author }: Props) => {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           {/* Left Content */}
           <div className="lg:col-span-8">
-            <div className="rounded-2xl border border-border  p-6 shadow-sm md:p-10">
+            <div className="rounded-2xl border border-border p-6 shadow-sm">
               {/* Blog Meta */}
               <div className="mb-6 flex flex-wrap items-center gap-3">
                 <span
@@ -91,30 +91,12 @@ const BlogDetailsPage = ({ blog, relatedBlogs, author }: Props) => {
               </p>
 
               {/* Divider */}
-              <div className="mb-10 border-t border-border" />
+              {/* <div className="mb-10 border-t border-border" /> */}
 
               {/* Content */}
-              <div
-                className="
-                  prose prose-invert max-w-none
-                  prose-headings:text-foreground
-                  prose-headings:scroll-mt-24
-                  prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-3xl prose-h2:font-bold
-                  prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-2xl prose-h3:font-semibold
-                  prose-p:text-muted-foreground prose-p:leading-8
-                  prose-strong:text-foreground
-                  prose-a:text-primary
-                  prose-a:no-underline hover:prose-a:underline
-                  prose-li:text-muted-foreground
-                  prose-ul:pl-5
-                  prose-ol:pl-5
-                  prose-blockquote:border-primary prose-blockquote:text-muted-foreground
-                  prose-img:rounded-2xl
-                  prose-code:text-primary
-                  prose-pre:border prose-pre:border-border prose-pre:bg-background
-                "
-                dangerouslySetInnerHTML={{ __html: blog.content }}
-              />
+              <div className="">
+                <QuillViewer value={blog.content} />
+              </div>
             </div>
           </div>
 
@@ -214,7 +196,7 @@ const BlogDetailsPage = ({ blog, relatedBlogs, author }: Props) => {
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             {relatedBlogs.map((relatedBlog, index) => (
-              <BlogCard key={relatedBlog.id} blog={relatedBlog} index={index} />
+              <BlogCard key={relatedBlog.id} blog={relatedBlog} />
             ))}
           </div>
 
