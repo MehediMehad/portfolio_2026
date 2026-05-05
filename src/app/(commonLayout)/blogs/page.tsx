@@ -15,7 +15,6 @@ const blogTypes: ("All" | BlogType)[] = [
   "Personal",
   "Lifestyle",
   "Health",
-  "Education",
 ];
 
 const BlogsPage = async ({
@@ -44,7 +43,7 @@ const BlogsPage = async ({
             <div className="hidden h-0.5 w-24 bg-linear-to-r from-primary to-transparent md:block" />
           </h2>
 
-          <BlogSearchFilters blogTypes={blogTypes} />
+          <BlogSearchFilters blogTypes={blogTypes} basePath="/blogs" />
         </div>
 
         <Suspense fallback={<TableSkeleton columns={3} />}>

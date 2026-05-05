@@ -10,9 +10,13 @@ import { useCallback, useEffect, useState } from "react";
 
 interface BlogSearchFiltersProps {
   blogTypes: ("All" | BlogType)[];
+  basePath?: string;
 }
 
-const BlogSearchFilters = ({ blogTypes }: BlogSearchFiltersProps) => {
+const BlogSearchFilters = ({
+  blogTypes,
+  basePath = "/blogs",
+}: BlogSearchFiltersProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -40,9 +44,10 @@ const BlogSearchFilters = ({ blogTypes }: BlogSearchFiltersProps) => {
 
       params.delete("page");
 
-      router.push(`/blogs?${params.toString()}`);
+      const nextQuery = params.toString();
+      router.push(nextQuery ? `${basePath}?${nextQuery}` : basePath);
     },
-    [router],
+    [basePath, router],
   );
 
   useEffect(() => {
@@ -56,7 +61,7 @@ const BlogSearchFilters = ({ blogTypes }: BlogSearchFiltersProps) => {
 
   const handleClearFilters = () => {
     setSearchTerm("");
-    router.push("/blogs");
+    router.push(basePath);
   };
 
   const activeType = searchParams.get("type") || "All";
@@ -92,7 +97,11 @@ const BlogSearchFilters = ({ blogTypes }: BlogSearchFiltersProps) => {
         ))}
 
         {/* {hasActiveFilters && (
-          <Button variant="outline" onClick={handleClearFilters}>
+          <Button
+            variant="outline"
+            onClick={handleClearFilters}
+            className="rounded-xl"
+          >
             Clear Filters
           </Button>
         )} */}
