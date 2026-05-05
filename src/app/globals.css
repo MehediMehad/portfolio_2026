@@ -158,3 +158,125 @@
     transform: translateY(0);
   }
 }
+
+/* -----------------------------
+   Quil editor
+----------------------------- */
+.rounded-quill-container .ql-toolbar {
+  border: 1px solid hsl(228 37% 22%) !important;
+  border-bottom: 1px solid hsl(228 37% 22%) !important;
+  background: #0b1222 !important;
+  border-radius: 12px 12px 0 0 !important;
+  padding: 12px 14px !important;
+}
+
+.rounded-quill-container .ql-container {
+  border: 1px solid hsl(228 37% 22%) !important;
+  border-top: 0 !important;
+  background: #0b1222 !important;
+  border-radius: 0 0 12px 12px !important;
+  min-height: 70vh;
+  font-size: 15px;
+}
+
+.rounded-quill-container .ql-editor {
+  min-height: 70vh !important;
+  color: #e5e7eb;
+  padding: 24px 18px;
+}
+
+.rounded-quill-container .ql-editor.ql-blank::before {
+  color: #9ca3af !important;
+  font-style: normal !important;
+  left: 18px !important;
+}
+
+/* Toolbar text/icons */
+.rounded-quill-container .ql-toolbar button,
+.rounded-quill-container .ql-toolbar .ql-picker-label {
+  color: #d1d5db !important;
+}
+
+.rounded-quill-container .ql-toolbar button svg,
+.rounded-quill-container .ql-toolbar .ql-stroke {
+  stroke: #d1d5db !important;
+}
+
+.rounded-quill-container .ql-toolbar .ql-fill {
+  fill: #d1d5db !important;
+}
+
+.rounded-quill-container .ql-toolbar button:hover,
+.rounded-quill-container .ql-toolbar button.ql-active,
+.rounded-quill-container .ql-toolbar .ql-picker-label:hover,
+.rounded-quill-container .ql-toolbar .ql-picker-label.ql-active {
+  color: #a855f7 !important;
+}
+
+.rounded-quill-container .ql-toolbar button:hover .ql-stroke,
+.rounded-quill-container .ql-toolbar button.ql-active .ql-stroke {
+  stroke: #a855f7 !important;
+}
+
+/* Dropdown */
+.rounded-quill-container .ql-picker-options {
+  background: #0b1222 !important;
+  border: 1px solid hsl(228 37% 22%) !important;
+  color: #e5e7eb !important;
+  border-radius: 10px;
+}
+
+/* Remove extra white spaces */
+.rounded-quill-container .ql-snow {
+  box-shadow: none !important;
+}
+
+/* Viewer mode */
+.rounded-quill-container.quill-viewer-mode .ql-container {
+  border-top: 1px solid hsl(228 37% 22%) !important;
+  border-radius: 12px !important;
+}
+
+.rounded-quill-container.quill-viewer-mode .ql-editor {
+  min-height: 70vh !important;
+  padding: 24px 18px !important;
+}
+
+.rounded-quill-container.quill-viewer-mode .ql-toolbar {
+  display: none !important;
+}
+
+/* Project description */
+
+.project-description .ql-toolbar {
+  display: none !important;
+}
+
+.project-description .ql-container {
+  border: none !important;
+  background: transparent !important;
+}
+
+.project-description .ql-editor {
+  padding: 0 !important;
+  color: #e5e7eb;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.project-description .ql-editor h1,
+.project-description .ql-editor h2,
+.project-description .ql-editor h3 {
+  color: #c084fc;
+  margin: 1rem 0 0.5rem;
+}
+
+.project-description .ql-editor p {
+  margin-bottom: 0.8rem;
+}
+
+.project-description .ql-editor ul,
+.project-description .ql-editor ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
