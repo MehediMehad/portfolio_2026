@@ -1,3 +1,5 @@
+"use server";
+
 // src/services/blogs/index.ts
 import { defaultMeta } from "@/constants";
 import { serverFetch } from "@/lib/server-fetch";
@@ -6,6 +8,14 @@ import { revalidateTag } from "next/cache";
 import { getCookie } from "../auth/tokenHandlers";
 
 const TAG = "blogs";
+
+const getErrorMessage = (error: unknown, fallback: string) => {
+    if (error instanceof Error && error.message) {
+        return error.message;
+    }
+
+    return fallback;
+};
 
 const revalidateBlogs = (id?: string, slug?: string) => {
     revalidateTag(TAG, { expire: 0 });
@@ -52,12 +62,12 @@ export const createBlog = async (formData: FormData) => {
             data: result.data,
             message: result.message || "Blog created successfully",
         };
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("❌ createBlog error:", error);
 
         return {
             success: false,
-            message: error?.message || "Failed to create blog",
+            message: getErrorMessage(error, "Failed to create blog"),
         };
     }
 };
@@ -89,14 +99,14 @@ export const getBlogs = async (queryString?: string) => {
 
         const result = await response.json();
         return result;
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.log(error);
 
         return {
             success: false,
             message:
                 process.env.NODE_ENV === "development"
-                    ? error.message
+                    ? getErrorMessage(error, "Something went wrong")
                     : "Something went wrong",
             data: [],
             meta: defaultMeta,
@@ -169,7 +179,7 @@ export const softDeleteBlog = async (id: string, slug?: string) => {
             throw new Error("No access token found");
         }
 
-        const response = await serverFetch.delete(`/blogs/${id}/soft-delete`, {
+        const response = await serverFetch.patch(`/blogs/${id}/soft-delete`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },
@@ -189,12 +199,12 @@ export const softDeleteBlog = async (id: string, slug?: string) => {
             data: result.data,
             message: result.message || "Blog deleted successfully",
         };
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("❌ softDeleteBlog error:", error);
 
         return {
             success: false,
-            message: error?.message || "Failed to delete blog",
+            message: getErrorMessage(error, "Failed to delete blog"),
         };
     }
 };

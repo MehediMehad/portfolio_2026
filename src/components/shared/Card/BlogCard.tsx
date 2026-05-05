@@ -5,13 +5,14 @@ import Link from "next/link";
 import { CalendarIcon, ArrowRightIcon } from "lucide-react";
 import { TBlog } from "@/types";
 import mehedi from "@/assets/images/MehediHasan.png";
+import BlogActions from "@/components/modules/Blogs/BlogActions";
 
 interface Props {
   blog: TBlog;
-  index?: number;
+  isAdmin?: boolean;
 }
 
-export function BlogCard({ blog, index = 0 }: Props) {
+export function BlogCard({ blog, isAdmin = false }: Props) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -40,6 +41,7 @@ export function BlogCard({ blog, index = 0 }: Props) {
     <div className="border-2 border-border rounded-xl overflow-hidden flex flex-col hover:border-primary transition-all duration-500 hover:shadow-[0_10px_30px_rgba(28,199,105,0.15)] group">
       {/* Image */}
       <div className="h-80 bg-linear-to-r from-secondary to-background border-b-2 border-border relative overflow-hidden group-hover:border-primary/50 transition-colors">
+        {isAdmin && <BlogActions blog={blog} />}
         {blog.image ? (
           <Image
             src={blog.image}
