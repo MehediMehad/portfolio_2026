@@ -141,6 +141,46 @@ export const getBlogBySlug = async (slug: string) => {
     }
 };
 
+// Update blog
+export const updateBlog = async (slug: string, formData: FormData) => {
+    try {
+        const accessToken = await getCookie("accessToken");
+
+        if (!accessToken) {
+            throw new Error("No access token found");
+        }
+
+        const response = await serverFetch.patch(`/blogs/${slug}`, {
+            body: formData,
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || "Failed to update blog");
+        }
+
+        const result = await response.json();
+
+        revalidateBlogs(result?.data?.id || result?.data?._id, result?.data?.slug || slug);
+
+        return {
+            success: true,
+            data: result.data,
+            message: result.message || "Blog updated successfully",
+        };
+    } catch (error: unknown) {
+        console.error("❌ updateBlog error:", error);
+
+        return {
+            success: false,
+            message: getErrorMessage(error, "Failed to update blog"),
+        };
+    }
+};
+
 // Get related blogs
 export const getRelatedBlogs = async (
     slug: string

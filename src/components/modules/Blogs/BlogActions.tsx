@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Trash2Icon } from "lucide-react";
+import { PencilIcon, Trash2Icon } from "lucide-react";
+import Link from "next/link";
 
 import { TBlog } from "@/types";
 
@@ -17,6 +18,13 @@ const BlogActions = ({ blog }: Props) => {
   return (
     <>
       <div className="absolute top-4 right-4 z-10 hidden gap-2 transition-all duration-500 group-hover:flex">
+        <Link
+          href={`/dashboard/blogs/${blog.slug}/edit`}
+          className="rounded-md border border-border bg-background/80 p-2 text-muted-foreground backdrop-blur transition-colors hover:border-primary hover:text-primary"
+        >
+          <PencilIcon className="h-4 w-4" />
+        </Link>
+
         <button
           type="button"
           onClick={() => setIsDeleteModalOpen(true)}
