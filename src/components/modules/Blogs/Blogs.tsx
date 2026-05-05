@@ -1,4 +1,3 @@
-// src/components/modules/Blogs/Blogs.tsx
 "use client";
 
 import { useState, useEffect } from "react";

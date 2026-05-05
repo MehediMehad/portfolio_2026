@@ -61,58 +61,23 @@ export const createProject = async (formData: FormData) => {
     }
 };
 
-export const getProjects2 = async (
-    params: GetProjectsParams = {}
-): Promise<{ meta: TMeta; data: TProject[] }> => {
-    const { page = 1, limit = 6 } = params;
-    try {
-        const queryParams = new URLSearchParams({
-            page: String(page),
-            limit: String(limit),
-        });
-
-        const res = await serverFetch.get(`/projects?${queryParams}`, {
-            cache: "no-store",
-        });
-
-        if (!res.ok) {
-            throw new Error(`HTTP Error: ${res.status}`);
-        }
-
-        const result: FetchResponse<TProject[]> = await res.json();
-
-        if (!result.success) {
-            throw new Error(result.message);
-        }
-
-        return {
-            meta: result.meta ?? defaultMeta,
-            data: result.data ?? [],
-        };
-    } catch (error) {
-        console.error("❌ getProjects error:", error);
-        return {
-            meta: defaultMeta,
-            data: [],
-        };
-    }
-};
-
-export async function getProjects(queryString?: string) {
+export async function getBlogs(queryString?: string) {
     try {
         const searchParams = new URLSearchParams(queryString);
 
         const page = searchParams.get("page") || "1";
         const searchTerm = searchParams.get("searchTerm") || "all";
+        const type = searchParams.get("type") || "all";
 
         const response = await serverFetch.get(
-            `/projects${queryString ? `?${queryString}` : ""}`,
+            `/blogs${queryString ? `?${queryString}` : ""}`,
             {
                 next: {
                     tags: [
-                        "projects-list",
-                        `projects-page-${page}`,
-                        `projects-search-${searchTerm}`,
+                        "blogs-list",
+                        `blogs-page-${page}`,
+                        `blogs-search-${searchTerm}`,
+                        `blogs-type-${type}`,
                     ],
                     revalidate: 180,
                 },
