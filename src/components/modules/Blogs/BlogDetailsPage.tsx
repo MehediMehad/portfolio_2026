@@ -8,7 +8,8 @@ import {
 } from "lucide-react";
 import { TBlogDetails, TRelatedBlog } from "@/types";
 import { BlogCard } from "@/components/shared/Card/BlogCard";
-import QuillViewer from "@/components/shared/TextEditor/QuillViewer";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type Props = {
   blog: TBlogDetails;
@@ -91,11 +92,21 @@ const BlogDetailsPage = ({ blog, relatedBlogs }: Props) => {
               </p>
 
               {/* Divider */}
-              {/* <div className="mb-10 border-t border-border" /> */}
+              <div className="mb-10 border-t border-border" />
 
               {/* Content */}
-              <div className="rounded-2xl border border-border/60 bg-background/20 p-1">
-                <QuillViewer value={blog.content} />
+              <div className="min-h-[500px] rounded-lg border border-white/10 bg-[#0b1222] p-5">
+                {blog.content ? (
+                  <article className="prose prose-invert max-w-none">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {blog.content}
+                    </ReactMarkdown>
+                  </article>
+                ) : (
+                  <p className="text-sm text-gray-500">
+                    Markdown preview will appear here...
+                  </p>
+                )}
               </div>
             </div>
           </div>
