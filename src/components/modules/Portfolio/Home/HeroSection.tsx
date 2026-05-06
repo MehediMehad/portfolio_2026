@@ -63,7 +63,7 @@ export function HeroSection() {
             {/* About Me */}
             <div>
               <h2 className="text-3xl font-bold text-primary mb-6 flex items-center gap-4">
-                About Me
+                Professional Summary
                 <div className="h-0.5 flex-1 bg-linear-to-r from-primary/50 to-transparent"></div>
               </h2>
               <div className=" border-2 border-border rounded-xl p-8 transition-all duration-300 min-h-[250px]">
