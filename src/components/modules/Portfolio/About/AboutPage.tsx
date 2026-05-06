@@ -7,11 +7,12 @@ import {
   DatabaseIcon,
   DownloadIcon,
   GlobeIcon,
+  LightbulbIcon,
   MailIcon,
   MapPinIcon,
   RocketIcon,
-  ShieldCheckIcon,
   SparklesIcon,
+  WorkflowIcon,
 } from "lucide-react";
 
 import profile from "@/assets/images/MehediHasan.png";
@@ -44,13 +45,13 @@ const services = [
     title: "Web Development",
     description:
       "Building responsive and performant websites and web applications.",
-    icon: Code2Icon,
+    icon: GlobeIcon,
   },
   {
     title: "API Development",
     description:
       "Creating secure backend APIs and integrating third-party services.",
-    icon: RocketIcon,
+    icon: WorkflowIcon,
   },
   {
     title: "Database Management",
@@ -62,7 +63,7 @@ const services = [
     title: "Problem Solving",
     description:
       "Turning complex requirements into clean, maintainable product solutions.",
-    icon: ShieldCheckIcon,
+    icon: LightbulbIcon,
   },
 ];
 
@@ -71,21 +72,6 @@ const stats = [
   { value: "1+", label: "Years of Experience", icon: CalendarDaysIcon },
   { value: "8+", label: "Core Technologies", icon: SparklesIcon },
   { value: "100%", label: "Commitment", icon: BriefcaseBusinessIcon },
-];
-
-const skillGroups = [
-  {
-    title: "Core Stack",
-    items: ["React.js", "Next.js", "TypeScript", "Node.js"],
-  },
-  {
-    title: "Backend",
-    items: ["Express.js", "MongoDB", "PostgreSQL", "Prisma"],
-  },
-  {
-    title: "Tools",
-    items: ["Git", "GitHub", "Docker", "Postman"],
-  },
 ];
 
 const highlightPoints = [
@@ -211,9 +197,9 @@ const AboutPage = () => {
                 return (
                   <div
                     key={service.title}
-                    className="flex gap-4 rounded-2xl border border-border bg-background/70 p-4 transition-colors hover:border-primary/30"
+                    className="flex items-center gap-4 rounded-2xl border border-border bg-background/70 p-4 transition-colors hover:border-primary/30"
                   >
-                    <div className="rounded-xl border border-primary/20 bg-primary/10 p-3 text-primary">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary">
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
@@ -236,48 +222,31 @@ const AboutPage = () => {
               <div className="h-0.5 flex-1 bg-linear-to-r from-primary/60 to-transparent" />
             </h3>
 
-            <div className="space-y-6">
-              {skillGroups.map((group) => (
-                <div key={group.title}>
-                  <h4 className="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-primary/80">
-                    {group.title}
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-xl border border-border bg-background px-3 py-2 text-sm text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-
-              <div>
-                <h4 className="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-primary/80">
-                  Toolkit
-                </h4>
-                <div className="grid grid-cols-2 gap-3">
-                  {skills.slice(0, 8).map((skill) => (
-                    <div
-                      key={skill.level}
-                      className="flex items-center gap-3 rounded-xl border border-border bg-background p-3"
-                    >
+            <div>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.16em] text-primary/80">
+                Programming Skills
+              </h4>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {skills.map((skill) => (
+                  <div
+                    key={skill.level}
+                    className="group flex items-center gap-3 rounded-lg border-2 border-border bg-background/70 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-[0_5px_15px_rgba(28,199,105,0.1)]"
+                  >
+                    <div className="rounded-md border border-border bg-amber-50 p-2 transition-colors group-hover:border-primary/30">
                       <Image
                         src={skill.icon}
                         alt={skill.level}
-                        width={18}
-                        height={18}
-                        className="h-[18px] w-[18px] object-contain"
+                        width={20}
+                        height={20}
+                        className="object-contain"
                       />
-                      <span className="text-sm text-foreground">
-                        {skill.level}
-                      </span>
                     </div>
-                  ))}
-                </div>
+
+                    <span className="font-medium text-foreground transition-colors group-hover:text-primary">
+                      {skill.level}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
