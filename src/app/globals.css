@@ -1,6 +1,7 @@
 /* globals.css */
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 /* -----------------------------
    CSS Variables

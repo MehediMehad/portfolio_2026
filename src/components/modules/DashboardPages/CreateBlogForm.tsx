@@ -4,32 +4,17 @@ import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { Tag, Type } from "lucide-react";
 import { toast } from "sonner";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import ImagePreviewer from "@/components/shared/ImageUploader/ImagePreviewer";
 import ImageUploader from "@/components/shared/ImageUploader/ImageUploader";
 import SingleSelect from "@/components/shared/SingleSelect";
 import { createBlog } from "@/services/blogs";
 import { BlogType } from "@/types";
-
-const QuillEditor = dynamic(
-  () => import("@/components/shared/TextEditor/QuillEditor"),
-  {
-    ssr: false,
-    loading: () => <p className="text-muted-foreground">Loading...</p>,
-  },
-);
-
-const QuillViewer = dynamic(
-  () => import("@/components/shared/TextEditor/QuillViewer"),
-  {
-    ssr: false,
-    loading: () => <p className="text-muted-foreground">Loading...</p>,
-  },
-);
 
 const blogTypes: BlogType[] = [
   "Tech",
@@ -53,7 +38,7 @@ const createBlogSchema = z.object({
   content: z
     .string()
     .min(30, "Blog content at least 30 characters long")
-    .refine((value) => value.replace(/<(.|\n)*?>/g, "").trim().length > 0, {
+    .refine((value) => value.trim().length > 0, {
       message: "Blog content is required",
     }),
   tags: z.string().min(1, "At least one tag is required"),
@@ -289,7 +274,7 @@ const CreateBlogForm = () => {
               onClick={() => setIsPreview(!isPreview)}
               className="rounded-md border border-white/10 bg-[#0b1222] px-4 py-2 text-sm text-gray-300 transition hover:bg-[#111827]"
             >
-              {isPreview ? "Edit" : "Preview"}
+              {isPreview ? "Edit Markdown" : "Preview"}
             </button>
           </div>
 
@@ -298,12 +283,42 @@ const CreateBlogForm = () => {
             control={control}
             render={({ field }) =>
               isPreview ? (
-                <QuillViewer value={field.value} />
+                <div className="min-h-[500px] rounded-lg border border-white/10 bg-[#0b1222] p-5">
+                  {field.value ? (
+                    <article className="prose prose-invert max-w-none">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {field.value}
+                      </ReactMarkdown>
+                    </article>
+                  ) : (
+                    <p className="text-sm text-gray-500">
+                      Markdown preview will appear here...
+                    </p>
+                  )}
+                </div>
               ) : (
-                <QuillEditor
+                <textarea
                   value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Write a detailed description about your blog..."
+                  onChange={(e) => field.onChange(e.target.value)}
+                  placeholder={`Write your blog in Markdown...
+
+# Blog Title
+
+## Section Title
+
+Your paragraph here...
+
+- Point one
+- Point two
+
+**Bold text**
+
+[Link text](https://example.com)
+
+\`\`\`js
+console.log("Hello world");
+\`\`\``}
+                  className="min-h-[500px] w-full resize-none rounded-lg border border-white/10 bg-[#0b1222] p-4 font-mono text-sm leading-7 text-white placeholder-gray-500 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400"
                 />
               )
             }
