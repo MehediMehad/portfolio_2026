@@ -1,6 +1,4 @@
-"use client";
 import { ArrowRightIcon } from "lucide-react";
-// removed useScrollAnimation - no scroll animations wanted
 import Link from "next/link";
 import { TProject } from "@/types/projects";
 import { ProjectCard } from "@/components/shared/Card/ProjectCard";
@@ -24,7 +22,7 @@ export function FeaturedProjects({ projects }: { projects: TProject[] }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects?.map((project, index) => (
+          {projects?.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
 
