@@ -1,3 +1,4 @@
+// src/app/(dashboardLayout)/dashboard/projects/page.tsx
 import { ProjectCard } from "@/components/shared/Card/ProjectCard";
 import TablePagination from "@/components/shared/TablePagination";
 import { TableSkeleton } from "@/components/shared/TableSkeleton";
