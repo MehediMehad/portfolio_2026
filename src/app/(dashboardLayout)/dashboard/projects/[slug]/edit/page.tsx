@@ -11,8 +11,6 @@ const EditProjectPage = async ({
   const { slug } = await params;
   const project = await getProjectBySlug(slug);
 
-  console.log(project);
-
   if (!project) {
     notFound();
   }
