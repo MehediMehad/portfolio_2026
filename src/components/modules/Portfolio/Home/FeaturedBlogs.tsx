@@ -1,4 +1,3 @@
-"use client";
 import { ArrowRightIcon } from "lucide-react";
 // removed useScrollAnimation - no scroll animations wanted
 import { TBlog } from "@/types";

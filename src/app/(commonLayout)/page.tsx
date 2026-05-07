@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { FeaturedBlogs } from "@/components/modules/Portfolio/Home/FeaturedBlogs";
 import { FeaturedProjects } from "@/components/modules/Portfolio/Home/FeaturedProjects";
 import { HeroSection } from "@/components/modules/Portfolio/Home/HeroSection";

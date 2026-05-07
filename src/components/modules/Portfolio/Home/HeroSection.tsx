@@ -1,5 +1,3 @@
-"use client";
-// removed useScrollAnimation - no scroll animations wanted
 import Image from "next/image";
 
 import mehedi from "@/assets/images/MehediHasan.png";
