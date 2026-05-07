@@ -5,7 +5,7 @@ import {
   PhoneIcon,
   SendIcon,
 } from "lucide-react";
-import { getMyInfo } from "@/services/auth/getUserInfo";
+import { getMyInfo } from "@/services/myInfo/myInfo";
 import { socialMedias } from "@/constants/myInfo";
 
 const fallbackProfile = {

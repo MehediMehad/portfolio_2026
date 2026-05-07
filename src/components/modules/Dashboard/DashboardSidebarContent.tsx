@@ -21,6 +21,8 @@ const DashboardSidebarContent = ({
   navItems,
   dashboardHome,
 }: DashboardSidebarContentProps) => {
+  console.log("userInfo", userInfo);
+
   const pathname = usePathname();
   return (
     <div className="hidden md:flex h-full w-64 flex-col border-r ">
@@ -85,14 +87,12 @@ const DashboardSidebarContent = ({
       <div className="border-t p-4">
         <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-            <span className="text-sm font-semibold text-primary">
-              {userInfo.name.charAt(0).toUpperCase()}
-            </span>
+            <span className="text-sm font-semibold text-primary">M</span>
           </div>
           <div className="flex-1 overflow-hidden">
-            <p className="text-sm font-medium truncate">{userInfo.name}</p>
+            <p className="text-sm font-medium truncate">Md Mehedi Hasan</p>
             <p className="text-xs text-muted-foreground capitalize">
-              {userInfo.designation.toLowerCase()}
+              Full Stack Developer
             </p>
           </div>
         </div>
