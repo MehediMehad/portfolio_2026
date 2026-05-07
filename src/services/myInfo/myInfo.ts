@@ -31,8 +31,6 @@ export const getMyInfo = async (): Promise<TUser | null> => {
 
         const result = await response.json();
 
-        console.log("result", result);
-
         if (result.success) {
             return result.data;
         }

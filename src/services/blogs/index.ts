@@ -100,7 +100,6 @@ export const getBlogs = async (queryString?: string) => {
         const result = await response.json();
         return result;
     } catch (error: unknown) {
-        console.log(error);
 
         return {
             success: false,

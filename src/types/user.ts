@@ -4,6 +4,7 @@ import { TSkill, TSocialMedia } from "@/types"
 export interface TUser {
     id: string
     name: string
+    role: "ADMIN" | "USER"
     image: string
     email: string
     number: string

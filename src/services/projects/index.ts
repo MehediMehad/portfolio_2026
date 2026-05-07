@@ -145,9 +145,6 @@ export const updateProject = async (slug: string, formData: FormData) => {
             },
         });
 
-        console.log("response", response);
-
-
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
             throw new Error(errorData.message || "Failed to update project");

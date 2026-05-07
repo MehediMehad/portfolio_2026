@@ -87,8 +87,6 @@ const EditBlogForm = ({ blog }: Props) => {
 
       const formData = new FormData();
 
-      console.log(formattedData, "formattedData 😍😍😍😍");
-
       if (imageFiles[0]) {
         formData.append("image", imageFiles[0]);
       }

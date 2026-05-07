@@ -12,11 +12,8 @@ export const getUserInfo = async (): Promise<TUser | any> => {
 
         const accessToken = await getCookie("accessToken");
 
-        console.log("accessToken", accessToken);
-
-
         if (!accessToken) {
-            throw new Error("No access token found");
+            return
         }
 
         const response = await serverFetch.get("/auth/me", {
@@ -28,14 +25,9 @@ export const getUserInfo = async (): Promise<TUser | any> => {
 
         const result = await response.json();
 
-        console.log("result", result);
-
 
         if (result.success) {
             const verifiedToken = jwt.verify(accessToken, process.env.JWT_SECRET as string) as JwtPayload;
-
-            console.log("verifiedToken", verifiedToken);
-
 
             userInfo = {
                 name: verifiedToken.name || "Unknown User",

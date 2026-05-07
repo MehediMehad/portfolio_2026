@@ -6,9 +6,7 @@ import { getFeaturedProjects } from "@/services/projects/featuredProjects";
 
 const HomePage = async () => {
   const projects = await getFeaturedProjects();
-  // console.log("🚀 ~ projects:", projects);
   const blogs = await getFeaturedBlogs();
-  // console.log("🚀 ~ blogs:", blogs);
 
   return (
     <div className="">
