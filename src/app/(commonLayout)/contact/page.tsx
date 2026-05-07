@@ -5,44 +5,29 @@ import {
   PhoneIcon,
   SendIcon,
 } from "lucide-react";
-import { getMyInfo } from "@/services/myInfo/myInfo";
 import { socialMedias } from "@/constants/myInfo";
 
-const fallbackProfile = {
-  email: "mdmehedihasanmehad@gmail.com",
-  address: "Dhaka, Bangladesh",
-  number: "+880 1XXXXXXXXX",
-};
-
 const ContactPage = async () => {
-  const myInfo = await getMyInfo();
-
-  if (!myInfo) return null;
-
-  const email = myInfo.email;
-  const location = myInfo.address;
-  const phone = myInfo.number;
-
   const contactItems = [
     {
       title: "Email",
-      value: email,
+      value: "mdmehedihasanmehad@gmail.com",
       detail: "I usually reply within 24 hours",
       icon: MailIcon,
-      href: `mailto:${email}`,
+      href: `mailto:mdmehedihasanmehad@gmail.com`,
     },
     {
       title: "Location",
-      value: location,
+      value: "Dhaka, Bangladesh",
       detail: "Available for remote work worldwide",
       icon: MapPinIcon,
     },
     {
       title: "Phone",
-      value: phone,
-      detail: "Mon - Fri, 10 AM - 8 PM (GMT+6)",
+      value: "+880 1604121107",
+      detail: "Sat - Fri, 10 AM - 8 PM (GMT+6)",
       icon: PhoneIcon,
-      href: `tel:${phone.replace(/\s/g, "")}`,
+      href: `tel:+880 1604121107`,
     },
     {
       title: "Website",
