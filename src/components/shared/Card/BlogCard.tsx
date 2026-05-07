@@ -59,13 +59,13 @@ export function BlogCard({ blog, isAdmin = false }: Props) {
       {/* Content */}
       <div className="p-6 flex flex-col flex-1">
         {/* Blog Type Badge */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <span
             className={`inline-block px-3 py-1 text-xs font-bold rounded-md border ${currentTypeStyle}`}
           >
             {blog.type}
           </span>
-        </div>
+        </div> */}
 
         {/* Title */}
         <h3 className="text-xl font-bold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
@@ -78,7 +78,7 @@ export function BlogCard({ blog, isAdmin = false }: Props) {
         </p>
 
         {/* Tags */}
-        {blog.tags && blog.tags.length > 0 && (
+        {/* {blog.tags && blog.tags.length > 0 && (
           <div className="mb-6">
             <span className="text-xs font-semibold text-primary mb-2 block">
               Tags:
@@ -94,13 +94,13 @@ export function BlogCard({ blog, isAdmin = false }: Props) {
               ))}
             </div>
           </div>
-        )}
+        )} */}
 
-        {/* Meta & Date */}
-        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+        {/*  Date */}
+        {/* <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
           <CalendarIcon className="w-4 h-4 text-primary" />
           <span>{formatDate(blog.createdAt)}</span>
-        </div>
+        </div> */}
 
         {/* Actions */}
         <div className="flex items-center justify-between pt-4 border-t-2 border-border group-hover:border-primary/20 transition-colors mt-auto">
