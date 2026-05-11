@@ -2,6 +2,7 @@ import { ArrowRightIcon } from "lucide-react";
 // removed useScrollAnimation - no scroll animations wanted
 import { TBlog } from "@/types";
 import { BlogCard } from "@/components/shared/Card/BlogCard";
+import Link from "next/link";
 
 type Props = {
   blogs: TBlog[];
@@ -16,13 +17,13 @@ export function FeaturedBlogs({ blogs }: Props) {
             Featured Blogs
             <div className="h-0.5 w-24 bg-linear-to-r from-primary to-transparent hidden md:block"></div>
           </h2>
-          <a
+          <Link
             href="/blogs"
             className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group font-medium"
           >
             View All
             <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

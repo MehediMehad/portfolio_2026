@@ -52,6 +52,7 @@ export const createProject = async (formData: FormData) => {
             data: result.data,
             message: result.message || "Project created successfully",
         };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.error("❌ createProject error:", error);
 
@@ -87,6 +88,7 @@ export const getProjects = async (queryString?: string) => {
 
         const result = await response.json();
         return result;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.log(error);
 
@@ -159,6 +161,7 @@ export const updateProject = async (slug: string, formData: FormData) => {
             data: result.data,
             message: result.message || "Project updated successfully",
         };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.error("❌ updateProject error:", error);
 
@@ -198,6 +201,7 @@ export const softDeleteProject = async (id: string, slug?: string) => {
             data: result.data,
             message: result.message || "Project deleted successfully",
         };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.error("❌ softDeleteProject error:", error);
 
