@@ -5,8 +5,10 @@ import { getFeaturedBlogs } from "@/services/blogs/featuredBlogs";
 import { getFeaturedProjects } from "@/services/projects/featuredProjects";
 
 const HomePage = async () => {
-  const projects = await getFeaturedProjects();
-  const blogs = await getFeaturedBlogs();
+  const [projects, blogs] = await Promise.all([
+    getFeaturedProjects(),
+    getFeaturedBlogs(),
+  ]);
 
   return (
     <div className="">
