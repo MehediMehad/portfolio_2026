@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import EditBlogForm from "@/components/modules/DashboardPages/EditBlogForm";
 import { getBlogBySlug } from "@/services/blogs";
 import { notFound } from "next/navigation";

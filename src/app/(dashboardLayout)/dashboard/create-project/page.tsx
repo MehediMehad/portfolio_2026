@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import CreateProjectForm from "@/components/modules/DashboardPages/CreateProjectForm";
 import { Suspense } from "react";
 

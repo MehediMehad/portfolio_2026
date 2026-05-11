@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import EditProjectForm from "@/components/modules/DashboardPages/EditProjectForm";
 import { getProjectBySlug } from "@/services/projects";
 import { notFound } from "next/navigation";

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import BlogSearchFilters from "@/components/modules/Blogs/BlogSearchFilters";
 import { BlogCard } from "@/components/shared/Card/BlogCard";
 import TablePagination from "@/components/shared/TablePagination";
