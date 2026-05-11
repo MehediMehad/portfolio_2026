@@ -1,7 +1,7 @@
 
 export const BACKEND_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL || "http://localhost:5000/api/v1";
 
-const serverFetchHelper = async (
+const serverFetchHelper2 = async (
     endpoint: string,
     options: RequestInit
 ): Promise<Response> => {
@@ -17,6 +17,28 @@ const serverFetchHelper = async (
     return response;
 };
 
+const serverFetchHelper = async (
+    endpoint: string,
+    options: RequestInit = {}
+): Promise<Response> => {
+    const controller = new AbortController();
+
+    const timeout = setTimeout(() => {
+        controller.abort();
+    }, 8000);
+
+    try {
+        return await fetch(`${BACKEND_API_URL}${endpoint}`, {
+            ...options,
+            signal: controller.signal,
+            headers: {
+                ...options.headers,
+            },
+        });
+    } finally {
+        clearTimeout(timeout);
+    }
+};
 
 export const serverFetch = {
     get: async (endpoint: string, options: RequestInit = {}): Promise<Response> => serverFetchHelper(endpoint, { ...options, method: "GET" }),
