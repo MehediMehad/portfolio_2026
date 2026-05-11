@@ -36,7 +36,7 @@ const Navbar = () => {
               className="object-cover"
             />
           </div>
-          <div className="hidden sm:flex flex-col leading-none">
+          <div className="flex flex-col leading-none">
             <span className="text-sm font-semibold text-foreground">
               Md Mehedi Hasan
             </span>
