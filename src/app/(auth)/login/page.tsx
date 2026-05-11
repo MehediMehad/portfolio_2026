@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import LoginForm from "@/components/modules/Login/LoginForm";
 import { Suspense } from "react";
 
