@@ -53,10 +53,11 @@ const Navbar = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${isActiveLink(link.href)
-                        ? "bg-[#07112a] text-primary shadow-[0_6px_18px_rgba(0,0,0,0.6)]"
-                        : "text-muted-foreground hover:text-primary"
-                      }`}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                      isActiveLink(link.href)
+                        ? "bg-primary text-black shadow-[0_6px_18px_rgba(0,0,0,0.6)]"
+                        : "text-foreground hover:text-primary"
+                    }`}
                   >
                     {link.name}
                   </Link>
@@ -70,7 +71,7 @@ const Navbar = () => {
           <Link
             target="_blank"
             href="https://drive.google.com/file/d/1gMs1zoSVF7rnndJHETWzrtn8ST-3wyfb/view?usp=sharing"
-            className="group inline-flex items-center gap-2 rounded-full border border-purple-400/30 bg-purple-500/10 px-5 py-2 text-sm font-semibold text-white"
+            className="group inline-flex items-center gap-2 rounded-full border border-purple-400/60 bg-purple-600 px-5 py-2 text-sm font-semibold text-white"
           >
             <DownloadIcon className="h-4 w-4" />
             <span>Resume</span>

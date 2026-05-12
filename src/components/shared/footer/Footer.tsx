@@ -3,6 +3,7 @@ import { Platform } from "@/types";
 import { MailIcon, MapPinIcon, GlobeIcon } from "lucide-react";
 import profile from "@/assets/images/MehediHasan.png";
 import Image from "next/image";
+import Link from "next/link";
 export const Footer = async () => {
   return (
     <footer className="border-t-2 border-border pt-16 pb-8 mt-20 bg-background ">
@@ -17,7 +18,7 @@ export const Footer = async () => {
                   alt="Md Mehedi Hasan"
                   width={48}
                   height={48}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full"
                 />
               </div>
               <div>
@@ -43,7 +44,7 @@ export const Footer = async () => {
                 if (!Icon) return null;
 
                 return (
-                  <a
+                  <Link
                     key={index}
                     href={social.url}
                     target="_blank"
@@ -53,7 +54,7 @@ export const Footer = async () => {
                     {socialIcons[social.platformName] || (
                       <GlobeIcon className="w-4 h-4" />
                     )}
-                  </a>
+                  </Link>
                 );
               })}
             </div>

@@ -33,11 +33,20 @@ export function ProjectCard({ project, isAdmin = false }: Props) {
         {/* 🔥 Admin Actions */}
         {isAdmin && <ProjectActions project={project} />}
         {project.image ? (
+          // <Image
+          //   src={project.image}
+          //   alt={project.title}
+          //   fill
+          //   className="w-full h-full object-cover"
+          // />
           <Image
             src={project.image}
             alt={project.title}
             fill
-            className="w-full h-full object-cover"
+            sizes="(max-width: 768px) 100vw,
+           (max-width: 1200px) 50vw,
+           33vw"
+            className="object-cover"
           />
         ) : (
           <div className="flex items-center justify-center h-full text-muted-foreground/30 font-bold text-2xl">
@@ -90,17 +99,17 @@ export function ProjectCard({ project, isAdmin = false }: Props) {
         {/* Actions */}
         <div className="flex items-center justify-between pt-4 border-t-2 border-border group-hover:border-primary/20 transition-colors mt-auto">
           <div className="flex gap-3">
-            <a
+            <Link
               href={project.liveURL || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground text-sm font-bold rounded-md hover:bg-primary/90 transition-colors shadow-[0_0_10px_rgba(28,199,105,0.2)] hover:shadow-[0_0_15px_rgba(28,199,105,0.4)]"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-black text-sm font-bold rounded-md hover:bg-primary/90 transition-colors shadow-[0_0_10px_rgba(28,199,105,0.2)] hover:shadow-[0_0_15px_rgba(28,199,105,0.4)]"
             >
               <ExternalLinkIcon className="w-4 h-4" />
               Live View
-            </a>
+            </Link>
 
-            <a
+            <Link
               href={project.gitHubURL || "#"}
               target="_blank"
               rel="noopener noreferrer"
@@ -108,7 +117,7 @@ export function ProjectCard({ project, isAdmin = false }: Props) {
             >
               <GithubIcon className="w-4 h-4" />
               Repository
-            </a>
+            </Link>
           </div>
 
           <Link
