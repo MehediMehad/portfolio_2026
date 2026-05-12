@@ -21,7 +21,7 @@ export function FeaturedBlogs({ blogs }: Props) {
             href="/blogs"
             className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group font-medium"
           >
-            View All
+            View All Blogs
             <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

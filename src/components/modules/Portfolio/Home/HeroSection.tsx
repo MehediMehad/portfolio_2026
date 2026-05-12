@@ -4,6 +4,7 @@ import mehedi from "@/assets/images/MehediHasan.png";
 import { skills } from "@/constants/skills";
 import { socialIcons, socialMedias } from "@/constants/socialMedias";
 import { GlobeIcon } from "lucide-react";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -40,9 +41,10 @@ export function HeroSection() {
               {/* Static Social Media Links */}
               <div className="flex gap-2">
                 {socialMedias.map((social) => (
-                  <a
+                  <Link
                     key={social.id}
                     href={social.url}
+                    aria-label={`Visit ${social.platformName} profile`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-full bg-background border-2 border-border hover:border-primary hover:text-primary transition-all duration-300 hover:shadow-[0_0_10px_rgba(28,199,105,0.2)]"
@@ -50,7 +52,7 @@ export function HeroSection() {
                     {socialIcons[social.platformName] || (
                       <GlobeIcon className="w-4 h-4" />
                     )}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

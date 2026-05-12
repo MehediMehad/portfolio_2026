@@ -1,3 +1,5 @@
+// src/app/(commonLayout)/page.tsx
+
 import { FeaturedBlogs } from "@/components/modules/Portfolio/Home/FeaturedBlogs";
 import { FeaturedProjects } from "@/components/modules/Portfolio/Home/FeaturedProjects";
 import { HeroSection } from "@/components/modules/Portfolio/Home/HeroSection";
@@ -12,11 +14,11 @@ const HomePage = async () => {
   ]);
 
   return (
-    <div className="">
+    <>
       <HeroSection />
       <FeaturedProjects projects={projects || []} />
       <FeaturedBlogs blogs={blogs || []} />
-    </div>
+    </>
   );
 };
 

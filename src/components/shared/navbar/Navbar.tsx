@@ -53,6 +53,7 @@ const Navbar = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
+                    aria-label={`Desktop navigation ${link.name}`}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                       isActiveLink(link.href)
                         ? "bg-primary text-black shadow-[0_6px_18px_rgba(0,0,0,0.6)]"

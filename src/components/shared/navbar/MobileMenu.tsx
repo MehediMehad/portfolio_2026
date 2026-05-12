@@ -34,6 +34,7 @@ const MobileMenu = ({
             <Link
               href={link.href}
               onClick={onClose}
+              aria-label={`Mobile menu ${link.name}`}
               className={`block rounded-xl px-4 py-3 text-sm font-medium transition-all ${
                 isActiveLink(link.href)
                   ? "bg-primary/10 text-primary"
@@ -46,15 +47,16 @@ const MobileMenu = ({
         ))}
       </ul>
 
-      <a
+      <Link
         target="_blank"
         rel="noopener noreferrer"
         href="https://drive.google.com/file/d/1gMs1zoSVF7rnndJHETWzrtn8ST-3wyfb/view?usp=sharing"
+        aria-label="Open resume in Google Drive"
         className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-purple-400/30 bg-purple-500/10 px-5 py-3 text-sm font-semibold text-white"
       >
         <DownloadIcon className="h-4 w-4" />
         Resume
-      </a>
+      </Link>
     </div>
   );
 };

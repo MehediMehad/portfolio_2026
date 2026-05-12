@@ -11,23 +11,23 @@ export const Footer = async () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Brand Column */}
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 border-2 border-primary overflow-hidden">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full overflow-hidden ring-1 ring-white/10">
                 <Image
                   src={profile}
                   alt="Md Mehedi Hasan"
-                  width={48}
-                  height={48}
-                  className="object-cover w-full"
+                  width={40}
+                  height={40}
+                  className="object-cover"
                 />
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-foreground">
+              <div className="flex flex-col leading-none">
+                <span className="text-sm font-semibold text-foreground">
                   Md Mehedi Hasan
-                </h3>
-                <p className="text-sm font-semibold text-primary">
-                  Full Stack Developer
-                </p>
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  FULL STACK DEVELOPER
+                </span>
               </div>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
@@ -49,6 +49,7 @@ export const Footer = async () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Visit ${social.platformName} profile`}
                     className="p-2.5 rounded-md bg-background border border-border hover:border-primary hover:text-primary transition-colors"
                   >
                     {socialIcons[social.platformName] || (
@@ -68,13 +69,14 @@ export const Footer = async () => {
             <ul className="flex flex-col gap-4">
               {["Home", "About", "Projects", "Blog", "Contact"].map((link) => (
                 <li key={link}>
-                  <a
+                  <Link
+                    aria-label={`Footer navigation ${link.toLowerCase()}`}
                     href={`#${link.toLowerCase()}`}
                     className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-3 group"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -94,12 +96,12 @@ export const Footer = async () => {
                   <p className="text-sm font-semibold text-foreground mb-1">
                     Email
                   </p>
-                  <a
+                  <Link
                     href={`mailto:mdmehedihasanmehad@gmail`}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     mdmehedihasanmehad@gmail
-                  </a>
+                  </Link>
                 </div>
               </li>
               <li className="flex items-start gap-4">
@@ -123,12 +125,12 @@ export const Footer = async () => {
                   <p className="text-sm font-semibold text-foreground mb-1">
                     Website
                   </p>
-                  <a
+                  <Link
                     href="https://mehedihasanmehad.vercel.app"
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     mehedihasanmehad.vercel.app
-                  </a>
+                  </Link>
                 </div>
               </li>
             </ul>
@@ -139,22 +141,40 @@ export const Footer = async () => {
         <div className="pt-8 border-t-2 border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()}{" "}
-            <span className="text-primary font-semibold">Md Mehedi Hasan</span>.
-            All rights reserved.
+            <span className="text-foreground font-semibold">
+              Md Mehedi Hasan
+            </span>
+            . All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-primary transition-colors">
+            <Link
+              href="/about"
+              aria-label="Footer navigation about"
+              className="hover:text-primary transition-colors"
+            >
               About
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
+            </Link>
+            <Link
+              href="/contact"
+              aria-label="Footer navigation contact"
+              className="hover:text-primary transition-colors"
+            >
               Contact
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
+            </Link>
+            <Link
+              href="/projects"
+              aria-label="Footer navigation project"
+              className="hover:text-primary transition-colors"
+            >
               Projects
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
+            </Link>
+            <Link
+              href="/blogs"
+              aria-label="Footer navigation blog"
+              className="hover:text-primary transition-colors"
+            >
               Blog
-            </a>
+            </Link>
           </div>
         </div>
       </div>

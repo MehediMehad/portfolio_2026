@@ -16,7 +16,7 @@ export function FeaturedProjects({ projects }: { projects: TProject[] }) {
             href="/projects"
             className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group font-medium"
           >
-            View All
+            View All Projects
             <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
