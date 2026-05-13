@@ -117,7 +117,7 @@ export function ProjectCard({ project, isAdmin = false }: Props) {
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3 py-1.5 border-2 border-border text-muted-foreground text-sm font-medium rounded-md hover:border-primary hover:text-primary transition-colors"
             >
-              <GithubIcon className="w-4 h-4" />
+              <GithubIcon className="w-4 h-4" aria-hidden="true" />
               Repository
             </Link>
           </div>
