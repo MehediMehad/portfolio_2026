@@ -103,10 +103,12 @@ export function ProjectCard({ project, isAdmin = false }: Props) {
               href={project.liveURL || "#"}
               target="_blank"
               rel="noopener noreferrer"
+              // This tells screen readers exactly what "Live View" refers to
+              aria-label={`Live view of ${project.title}`}
               className="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-black text-sm font-bold rounded-md hover:bg-primary/90 transition-colors shadow-[0_0_10px_rgba(28,199,105,0.2)] hover:shadow-[0_0_15px_rgba(28,199,105,0.4)]"
             >
-              <ExternalLinkIcon className="w-4 h-4" />
-              Live View
+              <ExternalLinkIcon className="w-4 h-4" aria-hidden="true" />
+              <span>Live View</span>
             </Link>
 
             <Link
