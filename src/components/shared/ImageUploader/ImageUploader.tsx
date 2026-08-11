@@ -24,7 +24,7 @@ const ImageUploader = ({
 
     if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) {
+    if (file.size > 6 * 1024 * 1024) {
       toast.error("Image size must be less than 5MB");
       event.target.value = "";
       return;
